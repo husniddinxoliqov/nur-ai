@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="uz" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nur Freelance — raqamli kasblarni o'rganish va mustaqil ish topish markazi." />
+  <title>💼 Nur Freelance — NurAI</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Asosiy kontentga o'tish</a>
+
+  <nav class="nav" aria-label="Asosiy navigatsiya">
+    <a class="nav-brand" href="index.html" aria-label="NurAI bosh sahifasi">🌟 <span>Nur</span>AI</a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html">🏠 Bosh sahifa</a></li>
+      <li><a href="smart-edu.html">🎓 Smart Edu</a></li>
+      <li><a href="freelance.html">💼 Freelance</a></li>
+      <li><a href="community.html">👥 Community</a></li>
+    </ul>
+    <button class="nav-tts-btn" id="nav-tts-btn"
+            aria-label="Sahifani o'qib bering (Alt+R)"
+            title="Sahifani o'qib bering (Alt+R)">🔊</button>
+  </nav>
+
+  <main id="main-content">
+
+    <header class="page-header">
+      <div class="page-header-inner">
+        <span class="page-header-icon" aria-hidden="true">💼</span>
+        <div class="page-header-text">
+          <h1>Nur Freelance</h1>
+          <p>
+            Raqamli va intellektual kasblarni o'rganib, platformada mustaqil ish toping.
+            Ko'zi ojizlar uchun maxsus mo'ljallangan karyera markazi.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-body">
+
+      <!-- Tabs -->
+      <div role="tablist" aria-label="Bo'limlar" id="fl-tabs"
+           style="display:flex; gap:0.5rem; margin-bottom:1.75rem; flex-wrap:wrap; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;">
+        <button role="tab" aria-selected="true" aria-controls="tab-careers"
+                class="btn btn-primary btn-sm fl-tab" data-tab="careers" id="tab-btn-careers">
+          🎯 Kasbiy Ta'lim
+        </button>
+        <button role="tab" aria-selected="false" aria-controls="tab-workshops"
+                class="btn btn-outline btn-sm fl-tab" data-tab="workshops" id="tab-btn-workshops">
+          🎤 Workshops
+        </button>
+        <button role="tab" aria-selected="false" aria-controls="tab-jobs"
+                class="btn btn-outline btn-sm fl-tab" data-tab="jobs" id="tab-btn-jobs">
+          💰 Ish Topish
+        </button>
+      </div>
+
+      <!-- Tab: Kasbiy Ta'lim -->
+      <section id="tab-careers" role="tabpanel" aria-labelledby="tab-btn-careers">
+
+        <div class="alert alert-success mb-2">
+          <span aria-hidden="true">💡</span>
+          <span>
+            Ko'zi ojizlar uchun eng mos raqamli kasblar tanlangan.
+            Barcha o'quv materiallar Audio va Braille formatda mavjud.
+          </span>
+        </div>
+
+        <div class="grid-2" role="list" aria-label="Kasbiy yo'nalishlar">
+
+          <div class="career-card" role="listitem" tabindex="0"
+               aria-label="Kontent yozuvchisi kasbi — ingliz va o'zbek tilida">
+            <div class="career-card-header">
+              <span class="career-icon" aria-hidden="true">✍️</span>
+              <div>
+                <h3>Kontent Yozuvchisi</h3>
+                <p class="card-desc" style="margin:0; font-size:0.88rem;">
+                  Maqola, blog post, ijtimoiy tarmoq uchun matnlar yozish.
+                  Ko'zi ojizlar uchun juda mos — faqat klaviatura kerak.
+                </p>
+              </div>
+            </div>
+            <div class="career-tags">
+              <span class="badge badge-green">🟢 Eng mos</span>
+              <span class="badge badge-blue">Boshlang'ich</span>
+              <span class="badge badge-orange">$200–800/oy</span>
+            </div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.3rem; font-size:0.88rem; color:var(--text-muted);">
+              <li>✓ SEO asoslari</li>
+              <li>✓ Copywriting texnikasi</li>
+              <li>✓ Ijtimoiy tarmoq matnlari</li>
+            </ul>
+            <button class="btn btn-primary btn-sm w-full" onclick="startCareer('kontent')"
+                    aria-label="Kontent yozuvchisi yo'nalishini boshlash">
+              📚 Boshlash →
+            </button>
+          </div>
+
+          <div class="career-card" role="listitem" tabindex="0"
+               aria-label="Tarjimon kasbi — ingliz va o'zbek tillari">
+            <div class="career-card-header">
+              <span class="career-icon" aria-hidden="true">🌐</span>
+              <div>
+                <h3>Tarjimon (Translator)</h3>
+                <p class="card-desc" style="margin:0; font-size:0.88rem;">
+                  Hujjatlar, veb saytlar, maqolalarni tarjima qilish.
+                  Uy sharoitida ishlash mumkin.
+                </p>
+              </div>
+            </div>
+            <div class="career-tags">
+              <span class="badge badge-green">🟢 Mos</span>
+              <span class="badge badge-blue">O'rta</span>
+              <span class="badge badge-orange">$300–1000/oy</span>
+            </div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.3rem; font-size:0.88rem; color:var(--text-muted);">
+              <li>✓ Ingliz tili B1+</li>
+              <li>✓ Tarjima dasturlari (CAT)</li>
+              <li>✓ Ixtisoslashgan tarjima</li>
+            </ul>
+            <button class="btn btn-primary btn-sm w-full" onclick="startCareer('tarjimon')"
+                    aria-label="Tarjimon yo'nalishini boshlash">
+              📚 Boshlash →
+            </button>
+          </div>
+
+          <div class="career-card" role="listitem" tabindex="0"
+               aria-label="Ma'lumotlar kirituvchisi kasbi">
+            <div class="career-card-header">
+              <span class="career-icon" aria-hidden="true">📊</span>
+              <div>
+                <h3>Ma'lumotlar Kiritish</h3>
+                <p class="card-desc" style="margin:0; font-size:0.88rem;">
+                  Excel, Google Sheets, ma'lumotlar bazasiga ma'lumot kiritish.
+                  Boshlang'ichlar uchun ideal birinchi kasb.
+                </p>
+              </div>
+            </div>
+            <div class="career-tags">
+              <span class="badge badge-green">🟢 Eng mos</span>
+              <span class="badge badge-blue">Boshlang'ich</span>
+              <span class="badge badge-orange">$100–400/oy</span>
+            </div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.3rem; font-size:0.88rem; color:var(--text-muted);">
+              <li>✓ Klaviatura terishni o'rganish</li>
+              <li>✓ Excel / Google Sheets</li>
+              <li>✓ Diqqat va aniqlik</li>
+            </ul>
+            <button class="btn btn-primary btn-sm w-full" onclick="startCareer('data-entry')"
+                    aria-label="Ma'lumotlar kiritish yo'nalishini boshlash">
+              📚 Boshlash →
+            </button>
+          </div>
+
+          <div class="career-card" role="listitem" tabindex="0"
+               aria-label="Audio tavsif mutaxassisi kasbi">
+            <div class="career-card-header">
+              <span class="career-icon" aria-hidden="true">🎙</span>
+              <div>
+                <h3>Audio Tavsif (Audiodescription)</h3>
+                <p class="card-desc" style="margin:0; font-size:0.88rem;">
+                  Video va rasmlar uchun audio tavsif yozish. Bu sohada
+                  ko'zi ojizlar o'zlari mutaxassis sifatida ustunlik qiladi.
+                </p>
+              </div>
+            </div>
+            <div class="career-tags">
+              <span class="badge badge-green">🟢 Noyob</span>
+              <span class="badge badge-orange">O'rta</span>
+              <span class="badge badge-orange">$400–1200/oy</span>
+            </div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.3rem; font-size:0.88rem; color:var(--text-muted);">
+              <li>✓ Tavsif yozish texnikasi</li>
+              <li>✓ Ovoz yozish asoslari</li>
+              <li>✓ Media imkoniyatlar standartlari</li>
+            </ul>
+            <button class="btn btn-primary btn-sm w-full" onclick="startCareer('audio-desc')"
+                    aria-label="Audio tavsif yo'nalishini boshlash">
+              📚 Boshlash →
+            </button>
+          </div>
+
+          <div class="career-card" role="listitem" tabindex="0"
+               aria-label="Python dasturchi kasbi">
+            <div class="career-card-header">
+              <span class="career-icon" aria-hidden="true">🐍</span>
+              <div>
+                <h3>Python Dasturchi</h3>
+                <p class="card-desc" style="margin:0; font-size:0.88rem;">
+                  Avtomatlashtirish skriptlari, bot yaratish, ma'lumotlarni
+                  tahlil qilish. Buyruq qatori orqali to'liq ishlash mumkin.
+                </p>
+              </div>
+            </div>
+            <div class="career-tags">
+              <span class="badge badge-orange">O'rta+</span>
+              <span class="badge badge-blue">6 oy</span>
+              <span class="badge badge-orange">$500–2000/oy</span>
+            </div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.3rem; font-size:0.88rem; color:var(--text-muted);">
+              <li>✓ Python asoslari</li>
+              <li>✓ API bilan ishlash</li>
+              <li>✓ Avtomatlashtirish</li>
+            </ul>
+            <button class="btn btn-primary btn-sm w-full" onclick="startCareer('python')"
+                    aria-label="Python dasturchi yo'nalishini boshlash">
+              📚 Boshlash →
+            </button>
+          </div>
+
+          <div class="career-card" role="listitem" tabindex="0"
+               aria-label="Ovozli ovator (Voice Actor) kasbi">
+            <div class="career-card-header">
+              <span class="career-icon" aria-hidden="true">🎭</span>
+              <div>
+                <h3>Ovoz Aktyori (Voice Actor)</h3>
+                <p class="card-desc" style="margin:0; font-size:0.88rem;">
+                  Audiobook, reklama, e-learning uchun ovoz yozish.
+                  Ko'zi ojizlar uchun juda qulay kasb.
+                </p>
+              </div>
+            </div>
+            <div class="career-tags">
+              <span class="badge badge-green">🟢 Mos</span>
+              <span class="badge badge-blue">Boshlang'ich</span>
+              <span class="badge badge-orange">$200–1500/oy</span>
+            </div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.3rem; font-size:0.88rem; color:var(--text-muted);">
+              <li>✓ Diksiya va talaffuz</li>
+              <li>✓ Audacity bilan ishlash</li>
+              <li>✓ Fiverr/Upwork profili</li>
+            </ul>
+            <button class="btn btn-primary btn-sm w-full" onclick="startCareer('voice-actor')"
+                    aria-label="Ovoz aktyor yo'nalishini boshlash">
+              📚 Boshlash →
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Tab: Workshops -->
+      <section id="tab-workshops" role="tabpanel" aria-labelledby="tab-btn-workshops"
+               class="hidden">
+
+        <div class="section-header mb-2">
+          <h2 class="section-title">🎤 Yaqin Workshop-lar</h2>
+          <button class="btn btn-outline btn-sm" onclick="showToast('Barcha workshoplar yaqinda!', 'info')">
+            Barchasini ko'rish
+          </button>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:1rem;" role="list"
+             aria-label="Workshop ro'yxati">
+
+          <div class="workshop-card" role="listitem" tabindex="0"
+               aria-label="Screen Reader Pro workshop — 5 iyul, jonli">
+            <div class="workshop-date" aria-hidden="true">
+              <div class="day">05</div>
+              <div class="month">Iyul</div>
+            </div>
+            <div style="flex:1;">
+              <h3 style="font-size:1rem; margin-bottom:0.3rem;">Screen Reader Pro: NVDA bilan ishlash</h3>
+              <p style="font-size:0.88rem; color:var(--text-muted); margin:0 0 0.5rem;">
+                Ustozlar: Kamol Toshmatov · Davomiyligi: 2 soat · Bepul
+              </p>
+              <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                <span class="badge badge-green">🔴 Jonli</span>
+                <span class="badge badge-blue">Boshlang'ich</span>
+                <span class="badge badge-blue">Zoom orqali</span>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-sm" style="flex-shrink:0;"
+                    onclick="registerWorkshop('NVDA workshop')"
+                    aria-label="NVDA workshop-ga ro'yxatdan o'tish">
+              Ro'yxat →
+            </button>
+          </div>
+
+          <div class="workshop-card" role="listitem" tabindex="0"
+               aria-label="Freelance boshlash workshop — 12 iyul, yozib olingan">
+            <div class="workshop-date" aria-hidden="true">
+              <div class="day">12</div>
+              <div class="month">Iyul</div>
+            </div>
+            <div style="flex:1;">
+              <h3 style="font-size:1rem; margin-bottom:0.3rem;">Birinchi 100 dollaringizni Freelance-dan qanday topish</h3>
+              <p style="font-size:0.88rem; color:var(--text-muted); margin:0 0 0.5rem;">
+                Ustoz: Dilnoza Yusupova · Davomiyligi: 1.5 soat · Bepul
+              </p>
+              <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                <span class="badge badge-orange">📹 Yozilgan</span>
+                <span class="badge badge-blue">Boshlang'ich</span>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-sm" style="flex-shrink:0;"
+                    onclick="registerWorkshop('Freelance 100$ workshop')"
+                    aria-label="Freelance workshop-ni ko'rish">
+              Ko'rish →
+            </button>
+          </div>
+
+          <div class="workshop-card" role="listitem" tabindex="0"
+               aria-label="Python boshlang'ichlar uchun — 20 iyul, jonli">
+            <div class="workshop-date" aria-hidden="true">
+              <div class="day">20</div>
+              <div class="month">Iyul</div>
+            </div>
+            <div style="flex:1;">
+              <h3 style="font-size:1rem; margin-bottom:0.3rem;">Python: Boshlang'ichlar uchun amaliy mashg'ulot</h3>
+              <p style="font-size:0.88rem; color:var(--text-muted); margin:0 0 0.5rem;">
+                Ustoz: Jasur Mirzayev · Davomiyligi: 3 soat · Bepul
+              </p>
+              <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                <span class="badge badge-green">🔴 Jonli</span>
+                <span class="badge badge-orange">O'rta</span>
+                <span class="badge badge-blue">30 o'rin qolgan</span>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-sm" style="flex-shrink:0;"
+                    onclick="registerWorkshop('Python workshop')"
+                    aria-label="Python workshop-ga ro'yxatdan o'tish">
+              Ro'yxat →
+            </button>
+          </div>
+
+          <div class="workshop-card" role="listitem" tabindex="0"
+               aria-label="Kontent yozish masterklassi — 28 iyul">
+            <div class="workshop-date" aria-hidden="true">
+              <div class="day">28</div>
+              <div class="month">Iyul</div>
+            </div>
+            <div style="flex:1;">
+              <h3 style="font-size:1rem; margin-bottom:0.3rem;">Kontent Marketing: Ko'zi ojiz yozuvchilar uchun</h3>
+              <p style="font-size:0.88rem; color:var(--text-muted); margin:0 0 0.5rem;">
+                Ustoz: Malika Rahimova · Davomiyligi: 2 soat · Bepul
+              </p>
+              <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                <span class="badge badge-orange">📹 Yozilgan</span>
+                <span class="badge badge-blue">Boshlang'ich</span>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-sm" style="flex-shrink:0;"
+                    onclick="registerWorkshop('Kontent workshop')"
+                    aria-label="Kontent workshop-ni ko'rish">
+              Ko'rish →
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Tab: Ish Topish -->
+      <section id="tab-jobs" role="tabpanel" aria-labelledby="tab-btn-jobs"
+               class="hidden">
+
+        <div class="section-header mb-2">
+          <h2 class="section-title">💰 Ochiq Ishlar</h2>
+          <span class="text-muted text-sm" aria-live="polite" id="jobs-count">8 ta ish mavjud</span>
+        </div>
+
+        <div class="alert alert-warning mb-2">
+          <span aria-hidden="true">⚠️</span>
+          <span>
+            Demo versiyada ishlar namunali. Haqiqiy platformada barcha ishlar
+            platformaning o'zida yakunlanadi va to'lov NurAI orqali amalga oshiriladi.
+          </span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:0.75rem;" role="list"
+             aria-label="Ish o'rinlari ro'yxati">
+
+          <div class="job-card" role="listitem" tabindex="0"
+               aria-label="Maqola tarjimasi ishi — ingliz uzbek, 50 dollar">
+            <span class="job-icon" aria-hidden="true">🌐</span>
+            <div class="job-info">
+              <h4>Maqola tarjimasi (Ingliz → O'zbek)</h4>
+              <p>5000 so'z · Texnologiya mavzusi · 3 kun muddat</p>
+            </div>
+            <div class="job-pay" aria-label="50 dollar to'lov">$50</div>
+            <button class="btn btn-primary btn-sm" onclick="applyJob('Maqola tarjimasi')"
+                    aria-label="Maqola tarjimasi ishiga ariza topshirish">
+              Ariza →
+            </button>
+          </div>
+
+          <div class="job-card" role="listitem" tabindex="0"
+               aria-label="Blog post yozish — 5 maqola, 80 dollar">
+            <span class="job-icon" aria-hidden="true">✍️</span>
+            <div class="job-info">
+              <h4>Blog Post Yozish (5 ta)</h4>
+              <p>Har biri 800 so'z · SEO optimizatsiya · 7 kun muddat</p>
+            </div>
+            <div class="job-pay" aria-label="80 dollar to'lov">$80</div>
+            <button class="btn btn-primary btn-sm" onclick="applyJob('Blog post yozish')"
+                    aria-label="Blog post yozish ishiga ariza topshirish">
+              Ariza →
+            </button>
+          </div>
+
+          <div class="job-card" role="listitem" tabindex="0"
+               aria-label="Ma'lumotlar kiritish Excel — 30 dollar">
+            <span class="job-icon" aria-hidden="true">📊</span>
+            <div class="job-info">
+              <h4>Excel Ma'lumotlarni Kiritish</h4>
+              <p>500 yozuv · Excel formatida · 2 kun muddat</p>
+            </div>
+            <div class="job-pay" aria-label="30 dollar to'lov">$30</div>
+            <button class="btn btn-primary btn-sm" onclick="applyJob('Excel ma\'lumot kiritish')"
+                    aria-label="Excel ma'lumot kiritish ishiga ariza topshirish">
+              Ariza →
+            </button>
+          </div>
+
+          <div class="job-card" role="listitem" tabindex="0"
+               aria-label="Audiobook audio tavsifi — 150 dollar">
+            <span class="job-icon" aria-hidden="true">🎙</span>
+            <div class="job-info">
+              <h4>Audiobook Audio Tavsifi Yozish</h4>
+              <p>60 daqiqalik audio · Ingliz tilida · 5 kun muddat</p>
+            </div>
+            <div class="job-pay" aria-label="150 dollar to'lov">$150</div>
+            <button class="btn btn-primary btn-sm" onclick="applyJob('Audio tavsif')"
+                    aria-label="Audio tavsif ishiga ariza topshirish">
+              Ariza →
+            </button>
+          </div>
+
+          <div class="job-card" role="listitem" tabindex="0"
+               aria-label="Python bot yaratish — 200 dollar">
+            <span class="job-icon" aria-hidden="true">🐍</span>
+            <div class="job-info">
+              <h4>Telegram Bot Yaratish (Python)</h4>
+              <p>Oddiy bot · Python aiogram · 10 kun muddat</p>
+            </div>
+            <div class="job-pay" aria-label="200 dollar to'lov">$200</div>
+            <button class="btn btn-primary btn-sm" onclick="applyJob('Python bot')"
+                    aria-label="Python bot yaratish ishiga ariza topshirish">
+              Ariza →
+            </button>
+          </div>
+
+          <div class="job-card" role="listitem" tabindex="0"
+               aria-label="Ovoz yozish reklama uchun — 100 dollar">
+            <span class="job-icon" aria-hidden="true">🎭</span>
+            <div class="job-info">
+              <h4>Reklama Ovozini Yozish</h4>
+              <p>30 sek reklama · O'zbek tilida · 2 kun muddat</p>
+            </div>
+            <div class="job-pay" aria-label="100 dollar to'lov">$100</div>
+            <button class="btn btn-primary btn-sm" onclick="applyJob('Reklama ovozi')"
+                    aria-label="Reklama ovozi yozish ishiga ariza topshirish">
+              Ariza →
+            </button>
+          </div>
+
+          <div class="job-card" role="listitem" tabindex="0"
+               aria-label="Ijtimoiy tarmoq postlari — 60 dollar">
+            <span class="job-icon" aria-hidden="true">📱</span>
+            <div class="job-info">
+              <h4>Instagram / Telegram Postlar (20 ta)</h4>
+              <p>Texnologiya mavzusi · Emoji bilan · 5 kun muddat</p>
+            </div>
+            <div class="job-pay" aria-label="60 dollar to'lov">$60</div>
+            <button class="btn btn-primary btn-sm" onclick="applyJob('Ijtimoiy tarmoq postlari')"
+                    aria-label="Ijtimoiy tarmoq postlari ishiga ariza topshirish">
+              Ariza →
+            </button>
+          </div>
+
+          <div class="job-card" role="listitem" tabindex="0"
+               aria-label="E-learning kurs transkripsiyasi — 120 dollar">
+            <span class="job-icon" aria-hidden="true">📝</span>
+            <div class="job-info">
+              <h4>Video Kurs Transkripsiyasi</h4>
+              <p>3 soatlik video · O'zbek tiliga · 7 kun muddat</p>
+            </div>
+            <div class="job-pay" aria-label="120 dollar to'lov">$120</div>
+            <button class="btn btn-primary btn-sm" onclick="applyJob('Video transkripsiya')"
+                    aria-label="Video transkripsiya ishiga ariza topshirish">
+              Ariza →
+            </button>
+          </div>
+
+        </div><!-- jobs list -->
+      </section>
+
+    </div><!-- .page-body -->
+  </main>
+
+  <!-- Career Modal -->
+  <div id="career-modal" class="hidden"
+       role="dialog" aria-modal="true" aria-labelledby="career-modal-title"
+       style="position:fixed; inset:0; background:rgba(0,0,0,0.7);
+              display:flex; align-items:center; justify-content:center;
+              z-index:500; padding:1.5rem;">
+    <div style="background:var(--navy-card); border:1px solid var(--border);
+                border-radius:var(--radius); padding:2rem; max-width:500px; width:100%;
+                position:relative;">
+      <button onclick="closeCareerModal()"
+              style="position:absolute; top:1rem; right:1rem;"
+              class="btn btn-ghost btn-icon"
+              aria-label="Yopish">✕</button>
+      <h2 id="career-modal-title" style="margin-bottom:1rem;">📚 Yo'nalish boshlanmoqda</h2>
+      <p id="career-modal-body" style="color:var(--off-white); margin-bottom:1.5rem;"></p>
+      <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+        <a href="smart-edu.html" class="btn btn-primary">
+          🎓 Smart Edu-ga o'tish
+        </a>
+        <button class="btn btn-outline" onclick="closeCareerModal()">Yopish</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer" role="contentinfo">
+    <p>🌟 <strong>NurAI</strong> Nur Freelance · Ko'zi ojizlar uchun karyera markazi</p>
+  </footer>
+
+  <script src="js/speech.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+  /* ---- Tab switching ---- */
+  const tabs = document.querySelectorAll('.fl-tab');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      tabs.forEach(t => {
+        t.classList.remove('btn-primary');
+        t.classList.add('btn-outline');
+        t.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.remove('btn-outline');
+      btn.classList.add('btn-primary');
+      btn.setAttribute('aria-selected', 'true');
+
+      document.querySelectorAll('[role="tabpanel"]').forEach(p => p.classList.add('hidden'));
+      document.getElementById('tab-' + target).classList.remove('hidden');
+    });
+  });
+
+  /* ---- Career modal ---- */
+  const careerInfo = {
+    kontent: 'Kontent Yozuvchisi yo\'nalishi boshlandi! Bu yo\'nalishda SEO asoslari, copywriting va ijtimoiy tarmoq matnlari yozishni o\'rganasiz. Smart Edu-dagi "Kontent Yozish" kursiga o\'ting.',
+    tarjimon: 'Tarjimon yo\'nalishi boshlandi! Ingliz tili kursini Smart Edu-da davom ettiring va tarjima dasturlari bilan ishlashni o\'rganing.',
+    'data-entry': 'Ma\'lumotlar Kiritish yo\'nalishi boshlandi! Bu boshlang\'ichlar uchun eng qulay yo\'nalish. Klaviatura tezligini oshirish va Excel o\'rganishdan boshlang.',
+    'audio-desc': 'Audio Tavsif yo\'nalishi boshlandi! Siz ko\'zi ojiz sifatida bu sohada noyob ustunlikka egasiz. Tavsif yozish texnikasini Smart Edu-dan o\'rganing.',
+    python: 'Python Dasturlash yo\'nalishi boshlandi! Smart Edu-dagi Python kursidan boshlang. 6 oyda professional dasturchi bo\'lish mumkin.',
+    'voice-actor': 'Ovoz Aktyori yo\'nalishi boshlandi! Diksiya va talaffuz mashqlari, Audacity dasturini o\'rganishdan boshlang.',
+  };
+
+  function startCareer(type) {
+    const modal = document.getElementById('career-modal');
+    const body  = document.getElementById('career-modal-body');
+    body.textContent = careerInfo[type] || 'Yo\'nalish tez orada qo\'shiladi!';
+    modal.classList.remove('hidden');
+    document.getElementById('career-modal-title').focus();
+
+    if (window.Speech && Speech.isSupported()) {
+      Speech.speak(careerInfo[type] || 'Yo\'nalish tez orada qo\'shiladi!', { rate: 0.9 });
+    }
+  }
+
+  function closeCareerModal() {
+    document.getElementById('career-modal').classList.add('hidden');
+    Speech.stop && Speech.stop();
+  }
+
+  document.getElementById('career-modal').addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeCareerModal();
+  });
+
+  window.startCareer = startCareer;
+  window.closeCareerModal = closeCareerModal;
+
+  /* ---- Workshop register ---- */
+  window.registerWorkshop = function(name) {
+    showToast(`✅ "${name}"ga muvaffaqiyatli ro'yxatdan o'tdingiz!`, 'success', 4000);
+    if (window.Speech && Speech.isSupported()) {
+      Speech.speak(`${name}ga muvaffaqiyatli ro'yxatdan o'tdingiz! Siz bilan bog'lanamiz.`, { rate: 0.9 });
+    }
+  };
+
+  /* ---- Job apply ---- */
+  window.applyJob = function(name) {
+    showToast(`📨 "${name}" ishiga ariza yuborildi!`, 'success', 4000);
+    if (window.Speech && Speech.isSupported()) {
+      Speech.speak(`${name} ishiga arizangiz qabul qilindi. Ish beruvchi bilan tez orada bog'lanamiz.`, { rate: 0.9 });
+    }
+  };
+  </script>
+</body>
+</html>
