@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="uz" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NurAI Smart Edu — AI ovozli o'qituvchi yordamida mustaqil ta'lim platformasi.">
+  <title>Smart Edu 🎓 — NurAI</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ── Page-specific extras ── */
+    .edu-layout { display:grid; grid-template-columns:270px 1fr; min-height:calc(100vh - 73px); }
+    .lesson-list-item {
+      display:flex; align-items:center; gap:var(--sp3);
+      padding:var(--sp3) var(--sp5); cursor:pointer;
+      border-left:3px solid transparent;
+      background:none; border-right:none; border-top:none; border-bottom:none;
+      color:var(--color-white-muted); font-size:var(--fs-sm); font-weight:500;
+      width:100%; text-align:left; transition:all var(--t);
+    }
+    .lesson-list-item:hover,.lesson-list-item:focus{color:#fff;background:rgba(255,255,255,.05);border-left-color:var(--color-accent);}
+    .lesson-list-item.active{color:#fff;background:var(--color-accent-light);border-left-color:var(--color-accent);}
+    .lesson-list-item__num{
+      width:26px;height:26px;border-radius:50%;
+      background:rgba(255,255,255,.08);color:var(--color-white-muted);
+      display:flex;align-items:center;justify-content:center;
+      font-size:11px;font-weight:700;flex-shrink:0;
+    }
+    .lesson-list-item.active .lesson-list-item__num{background:var(--color-accent);color:#fff;}
+    .lesson-list-item.done .lesson-list-item__num::after{content:'✓';}
+    .lesson-list-item__info{flex:1;min-width:0;}
+    .lesson-list-item__title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;}
+    .lesson-list-item__dur{font-size:10px;color:var(--color-white-muted);}
+
+    .edu-main { padding:var(--sp8); overflow-y:auto; display:flex; flex-direction:column; gap:var(--sp6); }
+
+    /* TTS play button pulse */
+    .tts-play-btn.playing { background:var(--color-accent); color:#fff; }
+
+    .qa-grid { display:grid; grid-template-columns:1fr 1fr; gap:var(--sp5); }
+
+    @media(max-width:900px){ .qa-grid{grid-template-columns:1fr;} }
+    @media(max-width:768px){
+      .edu-layout{grid-template-columns:1fr;}
+      .edu-sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--color-border);}
+      .edu-main{padding:var(--sp4);}
+    }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#edu-main">Asosiy tarkibga o'tish</a>
+
+<!-- HEADER -->
+<header class="header" role="banner">
+  <div class="container">
+    <div class="header__inner">
+      <a href="../index.html" class="logo" aria-label="NurAI — bosh sahifa">
+        <span class="logo__icon" aria-hidden="true">🌟</span>
+        <span>NurAI</span>
+      </a>
+      <nav class="nav" role="navigation" aria-label="Asosiy navigatsiya">
+        <ul class="nav__list">
+          <li><a href="smart-edu.html"    class="nav__link">🎓 Smart Edu</a></li>
+          <li><a href="nur-freelance.html" class="nav__link">💼 Nur Freelance</a></li>
+          <li><a href="nur-community.html" class="nav__link">👥 Nur Community</a></li>
+        </ul>
+      </nav>
+      <div class="header__controls">
+        <button class="btn-icon" id="tts-toggle" aria-label="Ovozli o'qishni yoqish/o'chirish" aria-pressed="true">🔊</button>
+        <button class="btn-icon" id="font-increase" aria-label="Shriftni kattalashtirish">A+</button>
+        <button class="btn-icon" id="font-decrease" aria-label="Shriftni kichiklashtirish">A−</button>
+        <button class="btn-icon menu-btn" id="menu-toggle" aria-label="Menyu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE -->
+<div class="edu-layout">
+
+  <!-- ── SIDEBAR: course list ─────────────── -->
+  <aside class="sidebar edu-sidebar" aria-label="Darslar ro'yxati">
+
+    <div class="sidebar__section">
+      <p class="sidebar__heading">📚 Kurs</p>
+      <div style="padding:0 var(--sp4) var(--sp4);">
+        <div style="font-size:var(--fs-sm);font-weight:700;margin-bottom:var(--sp1);">Ingliz tili — A1</div>
+        <div style="font-size:var(--fs-xs);color:var(--color-white-muted);">6 ta dars · 2 soat 20 daqiqa</div>
+        <div class="progress-bar" style="margin-top:var(--sp3);">
+          <div class="progress-bar__fill" id="course-progress" style="width:33%"></div>
+        </div>
+        <div style="font-size:var(--fs-xs);color:var(--color-white-muted);margin-top:4px;">2 / 6 tugatildi</div>
+      </div>
+    </div>
+
+    <div class="sidebar__section">
+      <p class="sidebar__heading">Darslar</p>
+      <div class="sidebar__menu" id="lesson-list" role="list">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ── MAIN ─────────────────────────────── -->
+  <main id="edu-main" class="edu-main" role="main">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="Yo'l ko'rsatgich">
+      <p class="page-header__breadcrumb">
+        <a href="../index.html">NurAI</a> › Smart Edu › <span id="breadcrumb-lesson">1-dars</span>
+      </p>
+    </nav>
+
+    <!-- Lesson viewer -->
+    <div class="lesson-viewer" aria-labelledby="lesson-title">
+      <div class="lesson-viewer__head">
+        <div>
+          <span class="badge badge--blue" id="lesson-badge">Boshlang'ich</span>
+          <h1 class="lesson-viewer__title" id="lesson-title" style="margin-top:var(--sp2);">
+            Salomlashish va tanishish
+          </h1>
+        </div>
+        <div class="lesson-viewer__controls">
+          <button class="btn btn--secondary btn--sm tts-play-btn" id="lesson-read-btn"
+                  aria-label="Darsni ovozda o'qish">
+            <span aria-hidden="true">▶</span> O'qib berish
+          </button>
+          <button class="btn btn--secondary btn--sm" id="lesson-stop-btn"
+                  aria-label="O'qishni to'xtatish">
+            <span aria-hidden="true">⏹</span> To'xtatish
+          </button>
+        </div>
+      </div>
+
+      <div class="lesson-viewer__body" id="lesson-body" aria-live="polite">
+        <!-- filled by JS -->
+      </div>
+
+      <div class="lesson-viewer__foot">
+        <button class="btn btn--secondary btn--sm" id="prev-lesson-btn" aria-label="Oldingi dars">
+          ← Oldingi
+        </button>
+        <button class="btn btn--primary btn--sm" id="mark-done-btn" aria-label="Darsni tugatilgan deb belgilash">
+          ✓ Tugatildi
+        </button>
+        <button class="btn btn--secondary btn--sm" id="next-lesson-btn" aria-label="Keyingi dars">
+          Keyingi →
+        </button>
+      </div>
+    </div>
+
+    <!-- Q&A Grid: voice controls + AI chat -->
+    <div class="qa-grid">
+
+      <!-- Voice Controls -->
+      <div>
+        <div class="voice-panel" role="region" aria-label="Ovozli boshqaruv">
+          <div class="voice-panel__header">
+            <span aria-hidden="true">🎤</span> Ovozli Savol Berish
+          </div>
+          <div class="voice-panel__btns">
+            <button class="mic-btn" id="mic-btn"
+                    aria-label="Mikrofon — savol berish uchun bosing"
+                    aria-pressed="false">
+              🎤
+            </button>
+            <div class="voice-status-text" id="voice-status" role="status" aria-live="polite">
+              Savolingizni mikrofon orqali bering…
+            </div>
+          </div>
+          <div class="alert alert--info" style="margin-top:var(--sp4);margin-bottom:0;">
+            <span aria-hidden="true">💡</span>
+            Mikrofon tugmasini bosing va o'zbek tilida savol bering.
+            AI o'qituvchi javob beradi.
+          </div>
+        </div>
+
+        <!-- Quick questions -->
+        <div style="background:var(--color-navy-card);border:1px solid var(--color-border);border-radius:var(--r);padding:var(--sp5);">
+          <p style="font-size:var(--fs-sm);font-weight:600;margin-bottom:var(--sp3);color:var(--color-white-muted);">
+            ⚡ Tez savollar
+          </p>
+          <div style="display:flex;flex-direction:column;gap:var(--sp2);" id="quick-questions">
+            <!-- filled by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Chat -->
+      <div class="ai-chat" aria-label="AI O'qituvchi chat" role="region">
+        <div class="ai-chat__header">
+          <div class="ai-chat__avatar" aria-hidden="true">🤖</div>
+          <div>
+            <div class="ai-chat__name">NurAI O'qituvchi</div>
+            <div class="ai-chat__online">Faol</div>
+          </div>
+          <button class="btn-icon" id="chat-tts-toggle"
+                  aria-label="Chat javoblarini ovozda o'qish" title="Chat TTS"
+                  style="margin-left:auto;">🔊</button>
+        </div>
+
+        <div class="ai-chat__msgs" id="chat-msgs" role="log" aria-live="polite" aria-label="Chat xabarlari">
+          <!-- filled by JS -->
+        </div>
+
+        <div class="ai-chat__input-row">
+          <button class="mic-btn" id="chat-mic-btn"
+                  aria-label="Ovozli savol yuborish"
+                  style="width:40px;height:40px;font-size:1rem;flex-shrink:0;">🎤</button>
+          <input class="ai-chat__input" id="chat-input" type="text"
+                 placeholder="Savol yozing yoki 🎤 bosing…"
+                 aria-label="Savol matni">
+          <button class="btn btn--primary btn--sm" id="chat-send" aria-label="Yuborish">
+            ↑ Yuborish
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /qa-grid -->
+
+  </main>
+</div><!-- /edu-layout -->
+
+<!-- TTS Status Bar -->
+<div class="tts-bar" id="tts-bar" role="status" aria-live="polite" aria-atomic="true" hidden>
+  <div class="container">
+    <div class="tts-bar__inner">
+      <span class="tts-bar__icon" aria-hidden="true">🔊</span>
+      <span class="tts-bar__text" id="tts-bar-text">O'qilmoqda…</span>
+      <button class="tts-bar__stop" id="tts-bar-stop" aria-label="O'qishni to'xtatish">⏹ To'xtatish</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/speech.js"></script>
+<script src="../js/app.js"></script>
+<script>
+/* ════════════════════════════════════════════════
+   Smart Edu — Page Logic
+   ════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  /* ── Lesson data ─────────────────────────── */
+  const LESSONS = [
+    {
+      id: 1, title: "Salomlashish va tanishish", dur: "18 daq", badge: "Boshlang'ich", done: true,
+      body: `
+        <h3>Maqsad</h3>
+        <p>Ushbu darsda ingliz tilida odamlar bilan tanishish va salomlashish iboralarini o'rganamiz.</p>
+        <h3>Asosiy iboralar</h3>
+        <ul>
+          <li><strong>Hello / Hi</strong> — Salom</li>
+          <li><strong>My name is …</strong> — Mening ismim …</li>
+          <li><strong>Nice to meet you</strong> — Tanishganimdan xursandman</li>
+          <li><strong>How are you?</strong> — Qandaysiz?</li>
+          <li><strong>I'm fine, thank you</strong> — Yaxshiman, rahmat</li>
+          <li><strong>Goodbye / Bye</strong> — Xayr</li>
+        </ul>
+        <h3>Misol dialog</h3>
+        <p><strong>A:</strong> Hello! My name is Alice. Nice to meet you.</p>
+        <p><strong>B:</strong> Hi! I'm Bob. Nice to meet you too. How are you?</p>
+        <p><strong>A:</strong> I'm fine, thank you. And you?</p>
+        <p><strong>B:</strong> I'm great! Goodbye!</p>
+        <p><strong>A:</strong> Bye!</p>
+        <h3>Mashq</h3>
+        <p>AI o'qituvchiga mikrofondan salom bering va dialog mashq qiling.</p>
+      `,
+      quickQs: ["Salom qanday aytiladi?", "Nomimni qanday aytaman?", "Xayr qanday aytiladi?"]
+    },
+    {
+      id: 2, title: "Raqamlar 1–100", dur: "22 daq", badge: "Boshlang'ich", done: true,
+      body: `
+        <h3>Raqamlar</h3>
+        <p>Ingliz tilida raqamlarni to'g'ri talaffuz qilishni o'rganamiz.</p>
+        <ul>
+          <li>1–10: one, two, three, four, five, six, seven, eight, nine, ten</li>
+          <li>11–20: eleven, twelve, thirteen, fourteen, fifteen…twenty</li>
+          <li>O'nliklar: twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety, hundred</li>
+        </ul>
+        <h3>Qoidalar</h3>
+        <p>21 → twenty-one, 35 → thirty-five, 99 → ninety-nine</p>
+        <h3>Mashq</h3>
+        <p>Mikrofondan "How much is it?" — "It is forty-five dollars" dialog mashq qiling.</p>
+      `,
+      quickQs: ["13 inglizcha?", "50 qanday?", "100 nechta?"]
+    },
+    {
+      id: 3, title: "Ranglar va ta'riflar", dur: "20 daq", badge: "Boshlang'ich",  done: false,
+      body: `
+        <h3>Ranglar</h3>
+        <ul>
+          <li>Qizil — red &nbsp;|&nbsp; Ko'k — blue &nbsp;|&nbsp; Yashil — green</li>
+          <li>Sariq — yellow &nbsp;|&nbsp; Oq — white &nbsp;|&nbsp; Qora — black</li>
+          <li>To'q ko'k (navy) — navy blue</li>
+        </ul>
+        <h3>Ta'rif gaplari</h3>
+        <p><strong>The sky is blue.</strong> — Osmon ko'k.</p>
+        <p><strong>The apple is red.</strong> — Olma qizil.</p>
+        <p><strong>This is a white shirt.</strong> — Bu oq ko'ylak.</p>
+        <h3>Mashq</h3>
+        <p>AI o'qituvchiga biror narsaning rangini inglizcha aytib bering.</p>
+      `,
+      quickQs: ["Ko'k inglizcha?", "Qizil inglizcha?", "Ta'rif gapini tushuntir"]
+    },
+    {
+      id: 4, title: "Hafta kunlari va oy nomlari", dur: "25 daq", badge: "Boshlang'ich", done: false,
+      body: `
+        <h3>Hafta kunlari</h3>
+        <ul>
+          <li>Dushanba — Monday &nbsp;|&nbsp; Seshanba — Tuesday &nbsp;|&nbsp; Chorshanba — Wednesday</li>
+          <li>Payshanba — Thursday &nbsp;|&nbsp; Juma — Friday &nbsp;|&nbsp; Shanba — Saturday &nbsp;|&nbsp; Yakshanba — Sunday</li>
+        </ul>
+        <h3>Oy nomlari</h3>
+        <ul>
+          <li>Yanvar — January &nbsp;|&nbsp; Fevral — February &nbsp;|&nbsp; Mart — March</li>
+          <li>Aprel — April &nbsp;|&nbsp; May — May &nbsp;|&nbsp; Iyun — June</li>
+          <li>Iyul — July &nbsp;|&nbsp; Avgust — August &nbsp;|&nbsp; Sentabr — September</li>
+          <li>Oktabr — October &nbsp;|&nbsp; Noyabr — November &nbsp;|&nbsp; Dekabr — December</li>
+        </ul>
+      `,
+      quickQs: ["Dushanba inglizcha?", "Yanvar inglizcha?", "Haftada necha kun?"]
+    },
+    {
+      id: 5, title: "Vaqt va kun tartibi", dur: "30 daq", badge: "O'rta", done: false,
+      body: `
+        <h3>Vaqt so'rash</h3>
+        <p><strong>What time is it?</strong> — Soat necha bo'ldi?</p>
+        <p><strong>It's 3 o'clock.</strong> — Soat uchda.</p>
+        <p><strong>It's half past two.</strong> — Soat ikki yarim.</p>
+        <p><strong>It's quarter to five.</strong> — Soat beshlarga chorak qoldi.</p>
+        <h3>Kun tartibi</h3>
+        <ul>
+          <li>Ertalab — in the morning</li>
+          <li>Tushda — at noon</li>
+          <li>Kechqurun — in the evening</li>
+          <li>Kechasi — at night</li>
+        </ul>
+      `,
+      quickQs: ["Soat necha degani?", "Ertalab inglizcha?", "O'rta kun inglizcha?"]
+    },
+    {
+      id: 6, title: "Qisqacha suhbat mashqi", dur: "35 daq", badge: "Amaliyot", done: false,
+      body: `
+        <h3>Real suhbat vaziyatlari</h3>
+        <p>Ushbu darsda oldingi darslardan o'rganilgan barcha bilimlarni amalda qo'llaymiz.</p>
+        <h3>Vaziyat 1: Do'konda</h3>
+        <p><strong>A:</strong> Hello! How much is this bag?</p>
+        <p><strong>B:</strong> It's forty dollars.</p>
+        <p><strong>A:</strong> Thank you. I'll take it.</p>
+        <h3>Vaziyat 2: Ko'chada</h3>
+        <p><strong>A:</strong> Excuse me, what time is it?</p>
+        <p><strong>B:</strong> It's half past three.</p>
+        <p><strong>A:</strong> Thank you very much!</p>
+        <p><strong>B:</strong> You're welcome. Have a nice day!</p>
+        <h3>Mashq</h3>
+        <p>AI o'qituvchi bilan shu dialoglarni ovozda mashq qiling.</p>
+      `,
+      quickQs: ["Do'konda qanday so'rash?", "Ruxsat so'rash qanday?", "Rahmat qanday?"]
+    }
+  ];
+
+  /* ── AI responses ────────────────────────── */
+  const AI_RESPONSES = {
+    "salom":         "Hello! — ingliz tilida salom demak. 'Hi' ham ishlatiladi. Ikkalasi ham to'g'ri va kun tartibida keng qo'llaniladi.",
+    "hello":         "Hello — eng keng tarqalgan salomlashish so'zi. Hi — norasmiy shakli. Good morning — ertalabki salom.",
+    "ismim":         "My name is [ismingiz] — mening ismim deyish uchun. Masalan: My name is Alisher.",
+    "xayr":          "Goodbye yoki Bye — xayr demak. See you later — keyinroq ko'rishgunacha.",
+    "ko'k":          "Ko'k rangi inglizcha — blue. To'q ko'k esa navy blue deyiladi.",
+    "qizil":         "Qizil rangi inglizcha — red. Masalan: The apple is red.",
+    "raqam":         "Ingliz tilida: 1-one, 2-two, 3-three, 4-four, 5-five, 6-six, 7-seven, 8-eight, 9-nine, 10-ten.",
+    "dushanba":      "Dushanba — Monday. Ingliz haftasi yakshanba (Sunday) dan boshlanadi.",
+    "yanvar":        "Yanvar — January. Oylar katta harf bilan yoziladi ingliz tilida.",
+    "soat":          "Soat necha? — What time is it? Soat uchda — It's 3 o'clock.",
+    "ertalab":       "Ertalab — in the morning. Good morning — ertalabki salom.",
+    "rahmat":        "Rahmat — Thank you yoki Thanks. Norasmiy: Cheers (britaniyacha).",
+    "default":       "Savolingiz uchun rahmat! Men ingliz tili bo'yicha yordam beraman. Konkret so'z yoki ibora haqida so'rang."
+  };
+
+  function getAIResponse(text) {
+    if (!text) return AI_RESPONSES.default;
+    const t = text.toLowerCase();
+    for (const [key, val] of Object.entries(AI_RESPONSES)) {
+      if (key !== 'default' && t.includes(key)) return val;
+    }
+    return AI_RESPONSES.default;
+  }
+
+  /* ── State ───────────────────────────────── */
+  let currentLesson = 0;
+  let chatAutoSpeak = true;
+
+  /* ── DOM refs ────────────────────────────── */
+  const lessonList    = document.getElementById('lesson-list');
+  const lessonTitle   = document.getElementById('lesson-title');
+  const lessonBadge   = document.getElementById('lesson-badge');
+  const lessonBody    = document.getElementById('lesson-body');
+  const breadcrumb    = document.getElementById('breadcrumb-lesson');
+  const prevBtn       = document.getElementById('prev-lesson-btn');
+  const nextBtn       = document.getElementById('next-lesson-btn');
+  const markDoneBtn   = document.getElementById('mark-done-btn');
+  const readBtn       = document.getElementById('lesson-read-btn');
+  const stopBtn       = document.getElementById('lesson-stop-btn');
+  const micBtn        = document.getElementById('mic-btn');
+  const voiceStatus   = document.getElementById('voice-status');
+  const chatMsgs      = document.getElementById('chat-msgs');
+  const chatInput     = document.getElementById('chat-input');
+  const chatSend      = document.getElementById('chat-send');
+  const chatMicBtn    = document.getElementById('chat-mic-btn');
+  const chatTTSToggle = document.getElementById('chat-tts-toggle');
+  const quickQsEl     = document.getElementById('quick-questions');
+  const courseProgress= document.getElementById('course-progress');
+
+  /* ── Render lesson list ──────────────────── */
+  function renderSidebar() {
+    lessonList.innerHTML = '';
+    LESSONS.forEach((l, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'lesson-list-item sidebar__item' +
+        (i === currentLesson ? ' active' : '') +
+        (l.done ? ' done' : '');
+      btn.setAttribute('role', 'listitem');
+      btn.setAttribute('aria-current', i === currentLesson ? 'true' : 'false');
+      btn.setAttribute('aria-label', `${l.id}-dars: ${l.title}${l.done ? ' (tugatildi)' : ''}`);
+      btn.innerHTML = `
+        <span class="lesson-list-item__num">${l.done ? '✓' : l.id}</span>
+        <span class="lesson-list-item__info">
+          <span class="lesson-list-item__title">${l.title}</span>
+          <span class="lesson-list-item__dur">⏱ ${l.dur}</span>
+        </span>`;
+      btn.addEventListener('click', () => loadLesson(i));
+      lessonList.appendChild(btn);
+    });
+
+    // Progress
+    const done = LESSONS.filter(l => l.done).length;
+    if (courseProgress) courseProgress.style.width = `${(done / LESSONS.length) * 100}%`;
+  }
+
+  /* ── Load a lesson ───────────────────────── */
+  function loadLesson(idx) {
+    currentLesson = Math.max(0, Math.min(idx, LESSONS.length - 1));
+    NurSpeech.stop();
+
+    const l = LESSONS[currentLesson];
+    lessonTitle.textContent = l.title;
+    lessonBadge.textContent = l.badge;
+    lessonBody.innerHTML    = l.body;
+    breadcrumb.textContent  = `${l.id}-dars: ${l.title}`;
+
+    prevBtn.disabled = currentLesson === 0;
+    nextBtn.disabled = currentLesson === LESSONS.length - 1;
+    markDoneBtn.style.display = l.done ? 'none' : '';
+
+    renderQuickQs(l.quickQs);
+    renderSidebar();
+
+    // Announce lesson title
+    NurSpeech.speak(`${l.id}-dars: ${l.title}`);
+  }
+
+  /* ── Quick questions ────────────────────── */
+  function renderQuickQs(qs) {
+    quickQsEl.innerHTML = '';
+    qs.forEach(q => {
+      const btn = document.createElement('button');
+      btn.className = 'btn btn--secondary btn--sm';
+      btn.textContent = q;
+      btn.addEventListener('click', () => sendChatMessage(q));
+      quickQsEl.appendChild(btn);
+    });
+  }
+
+  /* ── Chat ────────────────────────────────── */
+  function appendMsg(text, role) {
+    const div = document.createElement('div');
+    div.className = `chat-msg chat-msg--${role}`;
+    div.innerHTML = `
+      <div class="chat-msg__bubble">${escHtml(text)}</div>
+      <button class="chat-msg__tts-btn" aria-label="Ushbu xabarni o'qish">🔊</button>`;
+    div.querySelector('.chat-msg__tts-btn').addEventListener('click', () => NurSpeech.speak(text));
+    chatMsgs.appendChild(div);
+    chatMsgs.scrollTop = chatMsgs.scrollHeight;
+    return div;
+  }
+
+  function showTyping() {
+    const div = document.createElement('div');
+    div.className = 'chat-msg chat-msg--ai';
+    div.id = 'typing-indicator';
+    div.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+    chatMsgs.appendChild(div);
+    chatMsgs.scrollTop = chatMsgs.scrollHeight;
+  }
+
+  function hideTyping() {
+    const el = document.getElementById('typing-indicator');
+    if (el) el.remove();
+  }
+
+  function sendChatMessage(text) {
+    if (!text.trim()) return;
+    appendMsg(text, 'user');
+    chatInput.value = '';
+
+    showTyping();
+    setTimeout(() => {
+      hideTyping();
+      const reply = getAIResponse(text);
+      appendMsg(reply, 'ai');
+      if (chatAutoSpeak) NurSpeech.speak(reply);
+    }, 700 + Math.random() * 500);
+  }
+
+  /* ── Lesson read button ──────────────────── */
+  readBtn && readBtn.addEventListener('click', () => {
+    const bodyText = lessonBody.textContent.replace(/\s+/g, ' ').trim();
+    readBtn.classList.add('playing');
+    NurSpeech.speak(bodyText, null, () => readBtn.classList.remove('playing'));
+  });
+
+  stopBtn && stopBtn.addEventListener('click', () => {
+    NurSpeech.stop();
+    readBtn.classList.remove('playing');
+  });
+
+  /* ── Navigation ──────────────────────────── */
+  prevBtn && prevBtn.addEventListener('click', () => loadLesson(currentLesson - 1));
+  nextBtn && nextBtn.addEventListener('click', () => loadLesson(currentLesson + 1));
+  markDoneBtn && markDoneBtn.addEventListener('click', () => {
+    LESSONS[currentLesson].done = true;
+    markDoneBtn.style.display = 'none';
+    renderSidebar();
+    NurSpeech.speak('Tabriklaymiz! Dars tugatildi.');
+  });
+
+  /* ── Voice Q&A (mic panel) ───────────────── */
+  let micRecording = false;
+  micBtn && micBtn.addEventListener('click', () => {
+    if (micRecording) {
+      NurSpeech.stopListening();
+      micBtn.classList.remove('recording');
+      micBtn.setAttribute('aria-pressed', 'false');
+      micRecording = false;
+      voiceStatus.textContent = 'Savolingizni mikrofon orqali bering…';
+      return;
+    }
+    micBtn.classList.add('recording');
+    micBtn.setAttribute('aria-pressed', 'true');
+    micRecording = true;
+    voiceStatus.textContent = '🔴 Tinglanmoqda…';
+
+    NurSpeech.startListening(
+      (t, isFinal) => {
+        voiceStatus.textContent = (isFinal ? '✓ ' : '…') + t;
+        if (isFinal) sendChatMessage(t);
+      },
+      () => {
+        micBtn.classList.remove('recording');
+        micBtn.setAttribute('aria-pressed', 'false');
+        micRecording = false;
+      },
+      (err) => {
+        voiceStatus.textContent = 'Xatolik: ' + err;
+        micBtn.classList.remove('recording');
+        micBtn.setAttribute('aria-pressed', 'false');
+        micRecording = false;
+      }
+    );
+  });
+
+  /* ── Chat input ──────────────────────────── */
+  chatSend && chatSend.addEventListener('click', () => sendChatMessage(chatInput.value));
+  chatInput && chatInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') sendChatMessage(chatInput.value);
+  });
+
+  /* ── Chat mic ────────────────────────────── */
+  let chatMicRec = false;
+  chatMicBtn && chatMicBtn.addEventListener('click', () => {
+    if (chatMicRec) {
+      NurSpeech.stopListening();
+      chatMicBtn.classList.remove('recording');
+      chatMicRec = false;
+      return;
+    }
+    chatMicBtn.classList.add('recording');
+    chatMicRec = true;
+    NurSpeech.startListening(
+      (t, isFinal) => { if (isFinal) { chatInput.value = t; sendChatMessage(t); } },
+      () => { chatMicBtn.classList.remove('recording'); chatMicRec = false; },
+      () => { chatMicBtn.classList.remove('recording'); chatMicRec = false; }
+    );
+  });
+
+  /* ── Chat TTS toggle ─────────────────────── */
+  chatTTSToggle && chatTTSToggle.addEventListener('click', () => {
+    chatAutoSpeak = !chatAutoSpeak;
+    chatTTSToggle.classList.toggle('active', chatAutoSpeak);
+    chatTTSToggle.setAttribute('aria-pressed', String(chatAutoSpeak));
+  });
+  chatTTSToggle && chatTTSToggle.classList.add('active');
+
+  /* ── HTML escape ─────────────────────────── */
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  /* ── Init ────────────────────────────────── */
+  renderSidebar();
+  loadLesson(0);
+
+  // Welcome message
+  appendMsg(
+    'Assalomu alaykum! Men NurAI o\'qituvchisiman. Dars haqida savolingiz bo\'lsa, yozing yoki mikrofon orqali so\'rang. 🎓',
+    'ai'
+  );
+
+}());
+</script>
+</body>
+</html>

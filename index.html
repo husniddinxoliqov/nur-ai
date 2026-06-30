@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="uz" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+        content="NurAI — ko'zi ojiz va ko'rish qobiliyati cheklangan insonlarga zamonaviy ta'lim olish imkoniyatini beruvchi AI platformasi.">
+  <title>NurAI 🌟 — Inklyuziv Ta'lim Platformasi</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Skip navigation -->
+<a class="skip-link" href="#main">Asosiy tarkibga o'tish</a>
+
+<!-- ══ HEADER ══════════════════════════════════════════ -->
+<header class="header" role="banner">
+  <div class="container">
+    <div class="header__inner">
+      <a href="index.html" class="logo" aria-label="NurAI — bosh sahifa">
+        <span class="logo__icon" aria-hidden="true">🌟</span>
+        <span>NurAI</span>
+      </a>
+
+      <nav class="nav" role="navigation" aria-label="Asosiy navigatsiya">
+        <ul class="nav__list">
+          <li><a href="pages/smart-edu.html"      class="nav__link">🎓 Smart Edu</a></li>
+          <li><a href="pages/nur-freelance.html"   class="nav__link">💼 Nur Freelance</a></li>
+          <li><a href="pages/nur-community.html"   class="nav__link">👥 Nur Community</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__controls">
+        <button class="btn-icon" id="tts-toggle"
+                aria-label="Ovozli o'qishni yoqish / o'chirish"
+                aria-pressed="true" title="TTS (Alt+T)">🔊</button>
+        <button class="btn-icon" id="font-increase"
+                aria-label="Shriftni kattalashtirish" title="Shrift+">A+</button>
+        <button class="btn-icon" id="font-decrease"
+                aria-label="Shriftni kichiklashtirish" title="Shrift−">A−</button>
+        <button class="btn-icon menu-btn" id="menu-toggle"
+                aria-label="Menyu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ MAIN ════════════════════════════════════════════ -->
+<main id="main" role="main">
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container">
+      <div class="hero__content">
+        <div class="hero__badge" aria-hidden="true">♿ Inklyuziv Ta'lim</div>
+
+        <h1 id="hero-title" class="hero__title">
+          Har bir inson<br>
+          <span class="text-accent">o'rganish huquqiga</span><br>
+          ega
+        </h1>
+
+        <p class="hero__desc">
+          NurAI — ko'zi ojiz va ko'rish qobiliyati cheklangan insonlarga zamonaviy
+          ta'lim olish, kasb o'rganish va jamiyatga integratsiyalashish imkoniyatini
+          beruvchi innovatsion veb-platforma.
+        </p>
+
+        <div class="hero__actions">
+          <a href="pages/smart-edu.html" class="btn btn--primary btn--lg">
+            <span aria-hidden="true">🎓</span> Boshlash
+          </a>
+          <button class="btn btn--secondary btn--lg" id="hero-listen"
+                  aria-label="Bu sahifani ovozda eshittirish">
+            <span aria-hidden="true">🎧</span> Tinglab o'rganish
+          </button>
+        </div>
+      </div>
+
+      <div class="hero__visual" aria-hidden="true">
+        <div class="hero__orb hero__orb--0">🌟</div>
+        <div class="hero__orb hero__orb--1">🎓</div>
+        <div class="hero__orb hero__orb--2">💼</div>
+        <div class="hero__orb hero__orb--3">👥</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" aria-label="Platforma statistikasi">
+    <div class="container">
+      <div class="stats__grid">
+        <div class="stat-card">
+          <span class="stat-card__num">2M+</span>
+          <span class="stat-card__label">Ko'zi ojiz foydalanuvchi</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__num">50+</span>
+          <span class="stat-card__label">Kurs va darslar</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__num">100%</span>
+          <span class="stat-card__label">Ovozli boshqaruv</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__num">24/7</span>
+          <span class="stat-card__label">AI yordamchi</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULES -->
+  <section class="modules" aria-labelledby="modules-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="modules-title" class="section-title">Asosiy Modullar</h2>
+        <p class="section-subtitle">Har bir modul maxsus ehtiyojlar uchun mo'ljallangan</p>
+      </div>
+
+      <div class="modules__grid">
+
+        <!-- Smart Edu -->
+        <article class="module-card" aria-labelledby="mc-edu">
+          <div class="module-card__icon" aria-hidden="true">🎓</div>
+          <h3 id="mc-edu" class="module-card__title">Smart Edu</h3>
+          <p class="module-card__sub">Self-Study Platform</p>
+          <p class="module-card__desc">
+            AI yordamida darslarni mustaqil o'rganish. Ovozli o'qituvchi,
+            interaktiv savol-javob va TTS/STT texnologiyalari.
+          </p>
+          <ul class="module-card__features" aria-label="Xususiyatlar">
+            <li><span class="chk" aria-hidden="true">✓</span> AI Ovozli O'qituvchi</li>
+            <li><span class="chk" aria-hidden="true">✓</span> TTS / STT Texnologiyasi</li>
+            <li><span class="chk" aria-hidden="true">✓</span> Interaktiv Darslar</li>
+          </ul>
+          <a href="pages/smart-edu.html" class="btn btn--primary module-card__btn">
+            Modulni ochish <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <!-- Nur Freelance -->
+        <article class="module-card module-card--featured" aria-labelledby="mc-free">
+          <div class="module-card__badge" aria-label="Ommabop">Ommabop</div>
+          <div class="module-card__icon" aria-hidden="true">💼</div>
+          <h3 id="mc-free" class="module-card__title">Nur Freelance</h3>
+          <p class="module-card__sub">Kasbiy Rivojlanish</p>
+          <p class="module-card__desc">
+            Raqamli kasblarni o'rganish, amaliy workshops va
+            platformada freelance ish topish imkoniyati.
+          </p>
+          <ul class="module-card__features" aria-label="Xususiyatlar">
+            <li><span class="chk" aria-hidden="true">✓</span> Kasbiy Ta'lim</li>
+            <li><span class="chk" aria-hidden="true">✓</span> Jonli Workshops</li>
+            <li><span class="chk" aria-hidden="true">✓</span> Freelance Bozor</li>
+          </ul>
+          <a href="pages/nur-freelance.html" class="btn btn--primary module-card__btn">
+            Modulni ochish <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <!-- Nur Community -->
+        <article class="module-card" aria-labelledby="mc-comm">
+          <div class="module-card__icon" aria-hidden="true">👥</div>
+          <h3 id="mc-comm" class="module-card__title">Nur Community</h3>
+          <p class="module-card__sub">Ijtimoiy Muhit</p>
+          <p class="module-card__desc">
+            Yolg'izlikni yengish, tajriba ulashish va ovozli muloqot.
+            O'zingizga o'xshash insonlar bilan bog'laning.
+          </p>
+          <ul class="module-card__features" aria-label="Xususiyatlar">
+            <li><span class="chk" aria-hidden="true">✓</span> Ovozli Muloqot</li>
+            <li><span class="chk" aria-hidden="true">✓</span> Tajriba Ulashish</li>
+            <li><span class="chk" aria-hidden="true">✓</span> Do'stlar Topish</li>
+          </ul>
+          <a href="pages/nur-community.html" class="btn btn--primary module-card__btn">
+            Modulni ochish <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" aria-labelledby="features-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="features-title" class="section-title">Maxsus Imkoniyatlar</h2>
+        <p class="section-subtitle">Ko'rish qobiliyati cheklangan foydalanuvchilar uchun</p>
+      </div>
+
+      <div class="features__grid">
+        <div class="feature-item">
+          <span class="feature-item__icon" aria-hidden="true">🔊</span>
+          <h3 class="feature-item__title">Text-to-Speech</h3>
+          <p class="feature-item__desc">Barcha matnlar avtomatik ovozga aylantiriladi</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-item__icon" aria-hidden="true">🎤</span>
+          <h3 class="feature-item__title">Speech-to-Text</h3>
+          <p class="feature-item__desc">Ovoz buyruqlari orqali platformani boshqarish</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-item__icon" aria-hidden="true">⌨️</span>
+          <h3 class="feature-item__title">Klaviatura Navigatsiya</h3>
+          <p class="feature-item__desc">Sichqonchasisiz to'liq klaviatura boshqaruvi (Alt+1/2/3)</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-item__icon" aria-hidden="true">🔍</span>
+          <h3 class="feature-item__title">Katta Shrift</h3>
+          <p class="feature-item__desc">Shrift kattaligini xohlaganingizcha sozlang</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-item__icon" aria-hidden="true">🌙</span>
+          <h3 class="feature-item__title">Yuqori Kontrast</h3>
+          <p class="feature-item__desc">Navy + oq: ko'rish qobiliyati cheklanganlarga mos</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-item__icon" aria-hidden="true">🤖</span>
+          <h3 class="feature-item__title">AI Yordamchi</h3>
+          <p class="feature-item__desc">24/7 sun'iy intellekt yordamchisi darsda yordam beradi</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" aria-labelledby="cta-title">
+    <div class="container">
+      <div class="cta__inner">
+        <h2 id="cta-title" class="cta__title">Bugun boshlang! 🚀</h2>
+        <p class="cta__desc">
+          Minglab ko'zi ojiz insonlar bilan birga o'rganing, rivojlaning
+          va jamiyatga qo'shiling.
+        </p>
+        <div class="cta__actions">
+          <a href="pages/smart-edu.html" class="btn btn--primary btn--lg">
+            <span aria-hidden="true">🎓</span> Bepul Boshlash
+          </a>
+          <a href="pages/nur-community.html" class="btn btn--outline btn--lg">
+            <span aria-hidden="true">👥</span> Jamiyatga Qo'shilish
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══ FOOTER ══════════════════════════════════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a href="index.html" class="logo" aria-label="NurAI bosh sahifa">
+          <span aria-hidden="true">🌟</span> NurAI
+        </a>
+        <p class="footer__tagline">Ko'zi ojizlar uchun ta'lim</p>
+      </div>
+      <nav class="footer__nav" aria-label="Footer navigatsiya">
+        <ul>
+          <li><a href="pages/smart-edu.html">Smart Edu</a></li>
+          <li><a href="pages/nur-freelance.html">Nur Freelance</a></li>
+          <li><a href="pages/nur-community.html">Nur Community</a></li>
+        </ul>
+      </nav>
+      <div class="footer__info">
+        <p>♿ WCAG 2.1 AA muvofiq</p>
+        <p>&copy; 2024 NurAI. Barcha huquqlar himoyalangan.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ TTS STATUS BAR ══════════════════════════════════ -->
+<div class="tts-bar" id="tts-bar" role="status" aria-live="polite" aria-atomic="true" hidden>
+  <div class="container">
+    <div class="tts-bar__inner">
+      <span class="tts-bar__icon" aria-hidden="true">🔊</span>
+      <span class="tts-bar__text" id="tts-bar-text">O'qilmoqda…</span>
+      <button class="tts-bar__stop" id="tts-bar-stop" aria-label="O'qishni to'xtatish">
+        ⏹ To'xtatish
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="js/speech.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

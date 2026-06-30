@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="uz" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NurAI Nur Community — ko'zi ojizlar uchun ijtimoiy muloqot, tajriba ulashish va ovozli chat platformasi.">
+  <title>Nur Community 👥 — NurAI</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ── Extra community styles ── */
+    .member-card{
+      background:var(--color-navy-card);border:1px solid var(--color-border);
+      border-radius:var(--r);padding:var(--sp4);
+      display:flex;align-items:center;gap:var(--sp3);
+      transition:border-color var(--t);
+    }
+    .member-card:hover{border-color:var(--color-accent);}
+    .member-card__avatar{
+      width:48px;height:48px;border-radius:50%;
+      background:var(--color-accent-light);border:2px solid var(--color-accent);
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.4rem;flex-shrink:0;
+    }
+    .member-card__name{font-weight:600;font-size:var(--fs-sm);}
+    .member-card__role{font-size:var(--fs-xs);color:var(--color-white-muted);}
+    .member-card__actions{margin-left:auto;display:flex;gap:var(--sp2);}
+
+    .new-post-form{
+      background:var(--color-navy-card);border:1px solid var(--color-border);
+      border-radius:var(--r-lg);padding:var(--sp5);margin-bottom:var(--sp6);
+    }
+    .new-post-form h2{font-size:var(--fs-base);font-weight:600;margin-bottom:var(--sp4);}
+
+    .voice-msg-btn{
+      width:50px;height:50px;border-radius:50%;
+      background:var(--color-navy-light);border:2px solid var(--color-border);
+      color:var(--color-white-muted);font-size:1.3rem;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      transition:all var(--t);
+    }
+    .voice-msg-btn:hover,.voice-msg-btn:focus{
+      background:var(--color-accent);border-color:var(--color-accent);color:#fff;
+    }
+    .voice-msg-btn.recording{
+      background:var(--color-danger);border-color:var(--color-danger);color:#fff;
+      animation:rec-pulse 1s ease-in-out infinite;
+    }
+
+    .members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:var(--sp3);}
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#comm-main">Asosiy tarkibga o'tish</a>
+
+<!-- HEADER -->
+<header class="header" role="banner">
+  <div class="container">
+    <div class="header__inner">
+      <a href="../index.html" class="logo" aria-label="NurAI — bosh sahifa">
+        <span class="logo__icon" aria-hidden="true">🌟</span>
+        <span>NurAI</span>
+      </a>
+      <nav class="nav" role="navigation" aria-label="Asosiy navigatsiya">
+        <ul class="nav__list">
+          <li><a href="smart-edu.html"     class="nav__link">🎓 Smart Edu</a></li>
+          <li><a href="nur-freelance.html"  class="nav__link">💼 Nur Freelance</a></li>
+          <li><a href="nur-community.html"  class="nav__link">👥 Nur Community</a></li>
+        </ul>
+      </nav>
+      <div class="header__controls">
+        <button class="btn-icon" id="tts-toggle" aria-label="Ovozli o'qishni yoqish/o'chirish" aria-pressed="true">🔊</button>
+        <button class="btn-icon" id="font-increase" aria-label="Shriftni kattalashtirish">A+</button>
+        <button class="btn-icon" id="font-decrease" aria-label="Shriftni kichiklashtirish">A−</button>
+        <button class="btn-icon menu-btn" id="menu-toggle" aria-label="Menyu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE LAYOUT -->
+<div class="page-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" aria-label="Nur Community navigatsiyasi">
+
+    <div class="sidebar__section">
+      <p class="sidebar__heading">Mavzular</p>
+      <div class="sidebar__menu">
+        <button class="sidebar__item active" data-cat="all" aria-label="Barcha postlar">
+          <span class="sidebar__item__icon">🏠</span> Barcha postlar
+          <span class="sidebar__badge">47</span>
+        </button>
+        <button class="sidebar__item" data-cat="tajriba" aria-label="Tajriba ulashish">
+          <span class="sidebar__item__icon">💡</span> Tajriba ulashish
+          <span class="sidebar__badge">12</span>
+        </button>
+        <button class="sidebar__item" data-cat="savol" aria-label="Savollar">
+          <span class="sidebar__item__icon">❓</span> Savollar
+          <span class="sidebar__badge">18</span>
+        </button>
+        <button class="sidebar__item" data-cat="yangilik" aria-label="Yangiliklar">
+          <span class="sidebar__item__icon">📰</span> Yangiliklar
+          <span class="sidebar__badge">7</span>
+        </button>
+        <button class="sidebar__item" data-cat="elon" aria-label="E'lonlar">
+          <span class="sidebar__item__icon">📢</span> E'lonlar
+          <span class="sidebar__badge">5</span>
+        </button>
+        <button class="sidebar__item" data-cat="kasbiy" aria-label="Kasbiy maslahat">
+          <span class="sidebar__item__icon">🎯</span> Kasbiy maslahat
+          <span class="sidebar__badge">5</span>
+        </button>
+      </div>
+    </div>
+
+    <hr class="divider" style="margin:0 var(--sp4);">
+
+    <div class="sidebar__section">
+      <p class="sidebar__heading">Faol a'zolar</p>
+      <div class="sidebar__menu">
+        <div class="sidebar__item" style="cursor:default;">
+          <span class="sidebar__item__icon">👤</span>
+          <span>Aziz T.</span>
+          <span class="sidebar__badge" style="background:var(--color-success);">Faol</span>
+        </div>
+        <div class="sidebar__item" style="cursor:default;">
+          <span class="sidebar__item__icon">👤</span>
+          <span>Malika H.</span>
+          <span class="sidebar__badge" style="background:var(--color-success);">Faol</span>
+        </div>
+        <div class="sidebar__item" style="cursor:default;">
+          <span class="sidebar__item__icon">👤</span>
+          <span>Jahongir R.</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" style="margin:0 var(--sp4);">
+
+    <div style="padding:0 var(--sp5) var(--sp4);">
+      <button class="btn btn--primary btn--sm btn--full" id="show-post-form-btn">
+        ✏️ Yangi post
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main id="comm-main" class="main-content" role="main">
+
+    <!-- Page header -->
+    <div class="page-header">
+      <nav aria-label="Yo'l ko'rsatgich">
+        <p class="page-header__breadcrumb">
+          <a href="../index.html">NurAI</a> › Nur Community
+        </p>
+      </nav>
+      <h1 class="page-header__title">👥 Nur Community</h1>
+      <p class="page-header__sub">Yolg'izlikni yenging, tajriba ulashing va ovozli muloqot qiling</p>
+    </div>
+
+    <!-- Alert -->
+    <div class="alert alert--success" role="note">
+      <span aria-hidden="true">🎉</span>
+      Platformaga <strong>247 ta yangi a'zo</strong> qo'shildi bu hafta!
+    </div>
+
+    <!-- New Post Form (hidden by default) -->
+    <div class="new-post-form" id="new-post-form" hidden aria-label="Yangi post yaratish" role="region">
+      <h2>✏️ Yangi Post Yozish</h2>
+      <div class="form-group">
+        <label class="form-label" for="post-cat-select">Mavzu</label>
+        <select class="form-select" id="post-cat-select" aria-label="Post mavzusini tanlang">
+          <option value="">Mavzuni tanlang</option>
+          <option>Tajriba ulashish</option>
+          <option>Savol</option>
+          <option>Yangilik</option>
+          <option>E'lon</option>
+          <option>Kasbiy maslahat</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="post-title-input">Sarlavha</label>
+        <input class="form-input" id="post-title-input" type="text"
+               placeholder="Postingiz sarlavhasi…" aria-required="true">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="post-text-input">Matn</label>
+        <textarea class="form-textarea" id="post-text-input"
+                  placeholder="Fikr, savol yoki tajribangizni yozing…"
+                  aria-required="true"></textarea>
+      </div>
+
+      <!-- Voice message -->
+      <div class="form-group">
+        <label class="form-label" style="margin-bottom:var(--sp3);">
+          🎙️ Ovozli xabar qo'shish (ixtiyoriy)
+        </label>
+        <div style="display:flex;align-items:center;gap:var(--sp3);">
+          <button class="voice-msg-btn" id="voice-record-btn"
+                  aria-label="Ovozli xabar yozish uchun bosing" aria-pressed="false">🎤</button>
+          <span id="voice-record-status" style="font-size:var(--fs-sm);color:var(--color-white-muted);">
+            Mikrofon tugmasini bosib ovozli xabar qoldiring
+          </span>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:var(--sp3);">
+        <button class="btn btn--primary" id="submit-post-btn">Post yuborish</button>
+        <button class="btn btn--secondary" id="cancel-post-btn">Bekor qilish</button>
+      </div>
+    </div>
+
+    <!-- Tabs: Lenta | A'zolar -->
+    <div class="tabs" role="region" aria-label="Community bo'limlari">
+      <div class="tabs__nav" role="tablist" aria-label="Bo'limlar">
+        <button class="tab-btn active" role="tab"
+                aria-selected="true" aria-controls="tab-feed" id="btn-feed">
+          📝 Lenta
+        </button>
+        <button class="tab-btn" role="tab"
+                aria-selected="false" aria-controls="tab-members" id="btn-members">
+          👥 A'zolar
+        </button>
+        <button class="tab-btn" role="tab"
+                aria-selected="false" aria-controls="tab-voice" id="btn-voice">
+          🎙️ Ovozli xonalar
+        </button>
+      </div>
+
+      <!-- ── TAB: Lenta ─────────────────── -->
+      <div class="tab-panel active" id="tab-feed" role="tabpanel" aria-labelledby="btn-feed">
+        <div class="post-list" id="post-list" aria-label="Postlar ro'yxati">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+      <!-- ── TAB: A'zolar ───────────────── -->
+      <div class="tab-panel" id="tab-members" role="tabpanel" aria-labelledby="btn-members" hidden>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp5);flex-wrap:wrap;gap:var(--sp3);">
+          <h2 style="font-size:var(--fs-xl);font-weight:600;">Jamiyat a'zolari</h2>
+          <input class="form-input" type="search" placeholder="🔍 A'zo qidirish…"
+                 aria-label="A'zo qidirish" style="width:220px;">
+        </div>
+        <div class="members-grid" id="members-grid">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+      <!-- ── TAB: Ovozli xonalar ────────── -->
+      <div class="tab-panel" id="tab-voice" role="tabpanel" aria-labelledby="btn-voice" hidden>
+        <div style="margin-bottom:var(--sp5);">
+          <div class="alert alert--info" role="note">
+            <span aria-hidden="true">🎙️</span>
+            Ovozli xonaga kirish uchun brauzer mikrofonga ruxsat berishi kerak.
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--sp4);">
+
+          <div class="card">
+            <span class="card__tag card__tag--green">Faol · 5 ishtirokchi</span>
+            <div class="card__icon" aria-hidden="true">🌐</div>
+            <h3 class="card__title">Ingliz tili suhbati</h3>
+            <p class="card__desc">Ingliz tilini o'rganuvchilar uchun ochiq ovozli muhokama xonasi.</p>
+            <div style="display:flex;gap:var(--sp2);margin-top:auto;">
+              <button class="btn btn--primary btn--sm" style="flex:1;"
+                      onclick="joinVoiceRoom('Ingliz tili suhbati')">
+                🎙️ Kirish
+              </button>
+              <button class="btn btn--secondary btn--sm"
+                      onclick="NurApp.speak('Ingliz tili suhbati ovozli xonasi. 5 ishtirokchi.')">🔊</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="card__tag">2 ishtirokchi</span>
+            <div class="card__icon" aria-hidden="true">💼</div>
+            <h3 class="card__title">Freelance maslahat</h3>
+            <p class="card__desc">Freelance ish topish, narx belgilash va mijozlar bilan ishlash haqida.</p>
+            <div style="display:flex;gap:var(--sp2);margin-top:auto;">
+              <button class="btn btn--primary btn--sm" style="flex:1;"
+                      onclick="joinVoiceRoom('Freelance maslahat')">
+                🎙️ Kirish
+              </button>
+              <button class="btn btn--secondary btn--sm"
+                      onclick="NurApp.speak('Freelance maslahat xonasi. 2 ishtirokchi.')">🔊</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="card__tag card__tag--orange">Kutilmoqda · 0 ishtirokchi</span>
+            <div class="card__icon" aria-hidden="true">💡</div>
+            <h3 class="card__title">Motivatsiya va qo'llab-quvvatlash</h3>
+            <p class="card__desc">Bir-biringizni qo'llab-quvvatlang, muvaffaqiyatlarni ulashing.</p>
+            <div style="display:flex;gap:var(--sp2);margin-top:auto;">
+              <button class="btn btn--primary btn--sm" style="flex:1;"
+                      onclick="joinVoiceRoom('Motivatsiya xonasi')">
+                🎙️ Kirish
+              </button>
+              <button class="btn btn--secondary btn--sm"
+                      onclick="NurApp.speak('Motivatsiya va qo\'llab-quvvatlash xonasi.')">🔊</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="card__tag card__tag--green">Faol · 8 ishtirokchi</span>
+            <div class="card__icon" aria-hidden="true">📚</div>
+            <h3 class="card__title">Ta'lim va texnologiya</h3>
+            <p class="card__desc">Online ta'lim resurslari, dasturlar va yangi texnologiyalar haqida.</p>
+            <div style="display:flex;gap:var(--sp2);margin-top:auto;">
+              <button class="btn btn--primary btn--sm" style="flex:1;"
+                      onclick="joinVoiceRoom('Ta\'lim va texnologiya')">
+                🎙️ Kirish
+              </button>
+              <button class="btn btn--secondary btn--sm"
+                      onclick="NurApp.speak('Ta\'lim va texnologiya xonasi. 8 ishtirokchi.')">🔊</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /tabs -->
+
+  </main>
+</div><!-- /page-layout -->
+
+<!-- TTS Status Bar -->
+<div class="tts-bar" id="tts-bar" role="status" aria-live="polite" aria-atomic="true" hidden>
+  <div class="container">
+    <div class="tts-bar__inner">
+      <span class="tts-bar__icon" aria-hidden="true">🔊</span>
+      <span class="tts-bar__text" id="tts-bar-text">O'qilmoqda…</span>
+      <button class="tts-bar__stop" id="tts-bar-stop" aria-label="O'qishni to'xtatish">⏹ To'xtatish</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/speech.js"></script>
+<script src="../js/app.js"></script>
+<script>
+/* ════════════════════════════════════════════════
+   Nur Community — Page Logic
+   ════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  /* ── Post data ───────────────────────────── */
+  const POSTS = [
+    {
+      id: 1, author: "Aziz T.", emoji: "👨",
+      cat: "tajriba", catLabel: "Tajriba",
+      time: "2 soat oldin",
+      title: "Smart Edu yordamida ingliz tilini o'rgandim!",
+      text: "6 oy oldin NurAI Smart Edu modulini boshladim. Bugun ingliz tilida erkin gaplasha olaman. AI ovozli o'qituvchi juda yordam berdi. Har kuni 30 daqiqa ajratganimda natija ko'rindi.",
+      likes: 24, comments: 8
+    },
+    {
+      id: 2, author: "Malika H.", emoji: "👩",
+      cat: "savol", catLabel: "Savol",
+      time: "5 soat oldin",
+      title: "Braille klaviatura bilan qanday ishlash mumkin?",
+      text: "Kompyuter bilan ishlashda Braille klaviatura ishlatishni o'rganmoqchiman. Kimda tajriba bor? Qaysi dasturlarni tavsiya qilasiz?",
+      likes: 12, comments: 15
+    },
+    {
+      id: 3, author: "Jahongir R.", emoji: "👨",
+      cat: "kasbiy", catLabel: "Kasbiy maslahat",
+      time: "Kecha",
+      title: "Freelance tarjimonlik bo'yicha birinchi ish topish",
+      text: "Nur Freelance orqali birinchi ish buyurtmamni oldim! O'zbek-Rus tarjima. Maslahat: profilni to'liq to'ldiring va audio namunalar qo'shing. Mijozlar ovozni eshitganda ishonch ortadi.",
+      likes: 31, comments: 5
+    },
+    {
+      id: 4, author: "Nilufar S.", emoji: "👩",
+      cat: "yangilik", catLabel: "Yangilik",
+      time: "2 kun oldin",
+      title: "NurAI yangi ovoz modeli qo'shildi",
+      text: "Platformaga O'zbek tilida yangi TTS ovoz modeli qo'shildi. Endi matnlar ancha tabiiy va aniq o'qiladi. Smart Edu darslarida sinab ko'ring!",
+      likes: 45, comments: 12
+    },
+    {
+      id: 5, author: "Bobur M.", emoji: "👨",
+      cat: "tajriba", catLabel: "Tajriba",
+      time: "3 kun oldin",
+      title: "Podkast yaratish orqali oylik daromad",
+      text: "Podkast kursini tugatganimdan keyin 3 ta doimiy mijoz topdim. Har oy 500 dollar daromad qilyapman. Ko'zi ojiz ekanligim to'sqinlik qilmadi, aksincha ovozim kuchlirok bo'lib chiqdi.",
+      likes: 67, comments: 22
+    }
+  ];
+
+  /* ── Members data ────────────────────────── */
+  const MEMBERS = [
+    { name: "Aziz Toshmatov",  emoji: "👨", role: "Ingliz tili o'qituvchi", online: true  },
+    { name: "Malika Hasanova", emoji: "👩", role: "Python dasturchi",        online: true  },
+    { name: "Jahongir Rашидov",emoji: "👨", role: "Tarjimon",               online: false },
+    { name: "Nilufar Saidova", emoji: "👩", role: "Podkast yaratuvchi",     online: true  },
+    { name: "Bobur Mirzaev",   emoji: "👨", role: "Freelance yozuvchi",     online: false },
+    { name: "Zulfiya Nazarova",emoji: "👩", role: "Kontent menejer",        online: true  },
+    { name: "Sherzod Karimov", emoji: "👨", role: "IT mutaxassis",          online: false },
+    { name: "Dilorom Yusupova",emoji: "👩", role: "O'quvchi",               online: true  },
+  ];
+
+  /* ── Liked set ───────────────────────────── */
+  const liked = new Set();
+
+  /* ── Render posts ────────────────────────── */
+  function renderPosts(posts) {
+    const list = document.getElementById('post-list');
+    if (!list) return;
+    list.innerHTML = '';
+    posts.forEach(p => {
+      const el = document.createElement('article');
+      el.className = 'post-card';
+      el.setAttribute('aria-labelledby', `post-${p.id}-title`);
+      el.innerHTML = `
+        <div class="post-card__top">
+          <div class="post-card__avatar" aria-hidden="true">${p.emoji}</div>
+          <div>
+            <div class="post-card__author">${esc(p.author)}</div>
+            <div class="post-card__time">${p.time}</div>
+          </div>
+          <span class="post-card__cat" style="margin-left:auto;">${esc(p.catLabel)}</span>
+        </div>
+        <h2 class="post-card__title" id="post-${p.id}-title">${esc(p.title)}</h2>
+        <p class="post-card__text">${esc(p.text)}</p>
+        <div class="post-card__actions">
+          <button class="post-action ${liked.has(p.id) ? 'liked' : ''}"
+                  data-id="${p.id}" data-type="like"
+                  aria-label="${liked.has(p.id) ? 'Layk olib tashlash' : 'Layk bosish'}"
+                  aria-pressed="${liked.has(p.id)}">
+            👍 <span>${p.likes + (liked.has(p.id) ? 1 : 0)}</span>
+          </button>
+          <button class="post-action" data-id="${p.id}" data-type="comment"
+                  aria-label="Izoh qoldirish">
+            💬 ${p.comments}
+          </button>
+          <button class="post-action" data-id="${p.id}" data-type="read"
+                  aria-label="Ushbu postni ovozda o'qish">
+            🔊 O'qish
+          </button>
+        </div>`;
+
+      // Action handlers
+      el.querySelectorAll('.post-action').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const type = btn.dataset.type;
+          const id   = Number(btn.dataset.id);
+          if (type === 'like') {
+            if (liked.has(id)) { liked.delete(id); } else { liked.add(id); }
+            renderPosts(POSTS);
+          } else if (type === 'read') {
+            const post = POSTS.find(x => x.id === id);
+            if (post) NurApp.speak(`${post.title}. ${post.text}`);
+          } else if (type === 'comment') {
+            NurApp.speak('Izoh qoldirish funksiyasi tez orada qo\'shiladi.');
+          }
+        });
+      });
+
+      list.appendChild(el);
+    });
+  }
+
+  /* ── Render members ──────────────────────── */
+  function renderMembers() {
+    const grid = document.getElementById('members-grid');
+    if (!grid) return;
+    MEMBERS.forEach(m => {
+      const card = document.createElement('div');
+      card.className = 'member-card';
+      card.innerHTML = `
+        <div class="member-card__avatar" aria-hidden="true">${m.emoji}</div>
+        <div>
+          <div class="member-card__name">${esc(m.name)}</div>
+          <div class="member-card__role">${esc(m.role)}</div>
+          ${m.online ? '<span class="badge badge--green" style="margin-top:4px;">Faol</span>' : ''}
+        </div>
+        <div class="member-card__actions">
+          <button class="btn btn--secondary btn--sm"
+                  aria-label="${esc(m.name)} ga xabar yuborish">Ulash</button>
+        </div>`;
+      card.querySelector('.btn').addEventListener('click', () => {
+        NurApp.speak(`${m.name} bilan bog'lanish imkoniyati tez orada qo'shiladi.`);
+      });
+      grid.appendChild(card);
+    });
+  }
+
+  /* ── Category filter ─────────────────────── */
+  document.querySelectorAll('.sidebar__item[data-cat]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.sidebar__item[data-cat]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      const filtered = cat === 'all' ? POSTS : POSTS.filter(p => p.cat === cat);
+      renderPosts(filtered);
+      NurApp.speak(btn.textContent.trim());
+    });
+  });
+
+  /* ── New post form ───────────────────────── */
+  const form         = document.getElementById('new-post-form');
+  const showFormBtn  = document.getElementById('show-post-form-btn');
+  const cancelBtn    = document.getElementById('cancel-post-btn');
+  const submitBtn    = document.getElementById('submit-post-btn');
+
+  showFormBtn && showFormBtn.addEventListener('click', () => {
+    form.hidden = false;
+    form.querySelector('select, input, textarea').focus();
+    NurApp.speak('Post yozish shakli ochildi. Mavzuni tanlang.');
+  });
+
+  cancelBtn && cancelBtn.addEventListener('click', () => {
+    form.hidden = true;
+    NurApp.speak('Post bekor qilindi.');
+  });
+
+  submitBtn && submitBtn.addEventListener('click', () => {
+    const title = document.getElementById('post-title-input').value.trim();
+    const text  = document.getElementById('post-text-input').value.trim();
+    const cat   = document.getElementById('post-cat-select').value;
+
+    if (!title || !text) {
+      NurApp.speak('Iltimos, sarlavha va matn to\'ldiring.');
+      return;
+    }
+
+    POSTS.unshift({
+      id: Date.now(), author: "Siz", emoji: "🧑",
+      cat: cat || 'tajriba', catLabel: cat || 'Tajriba',
+      time: "Hozirgina", title, text, likes: 0, comments: 0
+    });
+    renderPosts(POSTS);
+    form.hidden = true;
+    document.getElementById('post-title-input').value = '';
+    document.getElementById('post-text-input').value  = '';
+    NurApp.speak('Postingiz muvaffaqiyatli joylashtirildi!');
+  });
+
+  /* ── Voice record (post form) ────────────── */
+  let voiceRec = false;
+  const vrBtn  = document.getElementById('voice-record-btn');
+  const vrStat = document.getElementById('voice-record-status');
+
+  vrBtn && vrBtn.addEventListener('click', () => {
+    if (voiceRec) {
+      NurSpeech.stopListening();
+      vrBtn.classList.remove('recording');
+      vrBtn.setAttribute('aria-pressed', 'false');
+      voiceRec = false;
+      return;
+    }
+    vrBtn.classList.add('recording');
+    vrBtn.setAttribute('aria-pressed', 'true');
+    voiceRec = true;
+    vrStat.textContent = '🔴 Yozilmoqda…';
+
+    NurSpeech.startListening(
+      (t, final) => {
+        vrStat.textContent = (final ? '✓ ' : '…') + t;
+        if (final) {
+          const ta = document.getElementById('post-text-input');
+          if (ta) ta.value = (ta.value ? ta.value + ' ' : '') + t;
+        }
+      },
+      () => { vrBtn.classList.remove('recording'); vrBtn.setAttribute('aria-pressed','false'); voiceRec = false; },
+      (e) => { vrStat.textContent = 'Xatolik: ' + e; vrBtn.classList.remove('recording'); voiceRec = false; }
+    );
+  });
+
+  /* ── Voice room ──────────────────────────── */
+  window.joinVoiceRoom = function (name) {
+    NurApp.speak(`${name} ovozli xonasiga qo'shildingiz. Mikrofon yoqiq.`);
+  };
+
+  /* ── Utilities ───────────────────────────── */
+  function esc(s) {
+    return String(s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  /* ── Init ────────────────────────────────── */
+  renderPosts(POSTS);
+  renderMembers();
+
+}());
+</script>
+</body>
+</html>
