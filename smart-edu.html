@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="uz" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Smart Edu — NurAI AI ovozli o'qituvchi va interaktiv darslar." />
+  <title>🎓 Smart Edu — NurAI</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Asosiy kontentga o'tish</a>
+
+  <nav class="nav" aria-label="Asosiy navigatsiya">
+    <a class="nav-brand" href="index.html" aria-label="NurAI bosh sahifasi">🌟 <span>Nur</span>AI</a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html">🏠 Bosh sahifa</a></li>
+      <li><a href="smart-edu.html">🎓 Smart Edu</a></li>
+      <li><a href="freelance.html">💼 Freelance</a></li>
+      <li><a href="community.html">👥 Community</a></li>
+    </ul>
+    <button class="nav-tts-btn" id="nav-tts-btn"
+            aria-label="Sahifani o'qib bering (Alt+R)"
+            title="Sahifani o'qib bering (Alt+R)">🔊</button>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <div class="page-header-inner">
+        <span class="page-header-icon" aria-hidden="true">🎓</span>
+        <div class="page-header-text">
+          <h1>Smart Edu — AI O'qituvchi</h1>
+          <p>
+            Darslarni tanlang, AI ovozli o'qituvchi orqali o'rganing va
+            savol-javob tizimidan foydalaning.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-body">
+
+      <div class="alert alert-info mb-2">
+        <span aria-hidden="true">💡</span>
+        <span>
+          <strong>Maslahat:</strong> Dars tanlang → <strong>▶ O'qib bering</strong> tugmasini bosing →
+          Savol berish uchun 🎙 tugmasini bosing yoki matn kiriting.
+          Klaviatura: <kbd>Alt+R</kbd> = o'qish, <kbd>Alt+S</kbd> = mikrofon.
+        </span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 320px 1fr; gap: 1.5rem; align-items: start;"
+           id="edu-layout">
+
+        <!-- Course List (left panel) -->
+        <aside aria-label="Kurslar ro'yxati">
+          <div class="section-header">
+            <h2 class="section-title">📚 Kurslar</h2>
+            <span class="badge badge-blue" aria-label="4 ta kurs mavjud">4</span>
+          </div>
+
+          <div id="course-list" role="list" aria-label="Mavjud kurslar">
+
+            <div class="course-card active" role="listitem" tabindex="0"
+                 data-course="0"
+                 aria-label="Braille va texnologiya — Boshlang'ich daraja, 40% tugallangan">
+              <div class="course-card-header">
+                <span class="course-icon" aria-hidden="true">⠃</span>
+                <div>
+                  <h3 style="font-size:1rem; margin:0;">Braille va Texnologiya</h3>
+                  <div class="course-meta">Boshlang'ich · 5 dars</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                <span class="badge badge-green">Faol</span>
+                <span class="badge badge-blue">40%</span>
+              </div>
+              <div class="course-progress-bar" role="progressbar" aria-valuenow="40"
+                   aria-valuemin="0" aria-valuemax="100" aria-label="40% tugallangan">
+                <div class="course-progress-fill" style="width:40%;"></div>
+              </div>
+            </div>
+
+            <div class="course-card mt-1" role="listitem" tabindex="0"
+                 data-course="1"
+                 aria-label="Ingliz tili — O'rta daraja, 20% tugallangan">
+              <div class="course-card-header">
+                <span class="course-icon" aria-hidden="true">🇬🇧</span>
+                <div>
+                  <h3 style="font-size:1rem; margin:0;">Ingliz tili A2–B1</h3>
+                  <div class="course-meta">O'rta · 12 dars</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                <span class="badge badge-orange">Davom etmoqda</span>
+                <span class="badge badge-blue">20%</span>
+              </div>
+              <div class="course-progress-bar" role="progressbar" aria-valuenow="20"
+                   aria-valuemin="0" aria-valuemax="100" aria-label="20% tugallangan">
+                <div class="course-progress-fill" style="width:20%;"></div>
+              </div>
+            </div>
+
+            <div class="course-card mt-1" role="listitem" tabindex="0"
+                 data-course="2"
+                 aria-label="Kompyuter asoslari — Boshlang'ich daraja, 0% tugallangan">
+              <div class="course-card-header">
+                <span class="course-icon" aria-hidden="true">💻</span>
+                <div>
+                  <h3 style="font-size:1rem; margin:0;">Kompyuter Asoslari</h3>
+                  <div class="course-meta">Boshlang'ich · 8 dars</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                <span class="badge badge-blue">Yangi</span>
+              </div>
+              <div class="course-progress-bar" role="progressbar" aria-valuenow="0"
+                   aria-valuemin="0" aria-valuemax="100" aria-label="0% tugallangan">
+                <div class="course-progress-fill" style="width:0%;"></div>
+              </div>
+            </div>
+
+            <div class="course-card mt-1" role="listitem" tabindex="0"
+                 data-course="3"
+                 aria-label="Dasturlash asoslari — O'rta daraja, 5% tugallangan">
+              <div class="course-card-header">
+                <span class="course-icon" aria-hidden="true">🐍</span>
+                <div>
+                  <h3 style="font-size:1rem; margin:0;">Python Dasturlash</h3>
+                  <div class="course-meta">O'rta · 15 dars</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                <span class="badge badge-blue">Yangi</span>
+              </div>
+              <div class="course-progress-bar" role="progressbar" aria-valuenow="5"
+                   aria-valuemin="0" aria-valuemax="100" aria-label="5% tugallangan">
+                <div class="course-progress-fill" style="width:5%;"></div>
+              </div>
+            </div>
+
+          </div><!-- #course-list -->
+        </aside>
+
+        <!-- Right Panel -->
+        <div style="display:flex; flex-direction:column; gap:1.25rem;">
+
+          <!-- Lesson Panel -->
+          <section class="lesson-panel" aria-labelledby="lesson-title">
+            <div>
+              <h2 id="lesson-title" style="font-size:1.2rem; margin-bottom:0.25rem;">
+                📖 <span id="current-lesson-title">1-dars: Braille alifbosi nima?</span>
+              </h2>
+              <p class="text-muted text-sm" id="lesson-meta">Braille va Texnologiya · 1/5</p>
+            </div>
+
+            <div class="lesson-content" id="lesson-text"
+                 aria-live="polite" aria-label="Dars matni">
+              <p>
+                <strong>Braille alifbosi</strong> — ko'zi ojiz insonlar uchun
+                maxsus ishlab chiqilgan yozuv tizimi. U Fransuz pedagog
+                <strong>Lui Braille</strong> tomonidan 1824-yilda ixtiro qilingan.
+              </p>
+              <p style="margin-top:1rem;">
+                Braille tizimi qo'lda his qilinadigan <em>nuqtalar</em> kombinatsiyasidan
+                iborat. Har bir harf, raqam va belgi 6 ta nuqtadan tashkil topgan
+                "katakcha" (cell) yordamida ifodalanadi.
+              </p>
+              <p style="margin-top:1rem;">
+                Zamonaviy texnologiyalar bilan birgalikda Braille displeylari,
+                elektron kitoblar va ekran o'quvchilar (screen readers) ko'zi ojizlarga
+                raqamli dunyoga kirish imkonini beradi.
+              </p>
+            </div>
+
+            <!-- TTS Controls -->
+            <div class="tts-controls" role="group" aria-label="Ovozli o'qish boshqaruvi">
+              <button class="btn btn-primary" id="tts-play-btn"
+                      aria-label="Darsni ovoz bilan o'qib bering">
+                ▶ O'qib bering
+              </button>
+              <button class="btn btn-outline" id="tts-pause-btn" disabled
+                      aria-label="Ovozli o'qishni to'xtatib turish">
+                ⏸ Pauza
+              </button>
+              <button class="btn btn-outline" id="tts-stop-btn" disabled
+                      aria-label="Ovozli o'qishni to'xtatish">
+                ⏹ Stop
+              </button>
+
+              <div style="display:flex; align-items:center; gap:0.5rem; margin-left:auto;">
+                <label for="tts-rate" class="text-sm text-muted">Tezlik:</label>
+                <input type="range" id="tts-rate" min="0.5" max="1.5" step="0.1" value="0.9"
+                       style="width:90px; accent-color:var(--accent);"
+                       aria-label="O'qish tezligi">
+                <span id="tts-rate-val" class="text-sm text-muted">0.9×</span>
+              </div>
+
+              <div class="tts-status" id="tts-status" aria-live="polite" aria-atomic="true">
+                <span id="tts-status-icon" aria-hidden="true">🔇</span>
+                <span id="tts-status-text">Tayyor</span>
+              </div>
+            </div>
+
+            <!-- Lesson navigation -->
+            <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center;">
+              <button class="btn btn-outline btn-sm" id="prev-lesson-btn"
+                      aria-label="Oldingi darsga o'tish">
+                ← Oldingi
+              </button>
+              <span class="text-sm text-muted" id="lesson-nav-info" aria-live="polite">1 / 5</span>
+              <button class="btn btn-primary btn-sm" id="next-lesson-btn"
+                      aria-label="Keyingi darsga o'tish">
+                Keyingi →
+              </button>
+              <button class="btn btn-success btn-sm" id="mark-done-btn"
+                      aria-label="Darsni bajarildiga belgilash">
+                ✓ Bajarildi
+              </button>
+            </div>
+          </section>
+
+          <!-- Q&A Panel -->
+          <section class="qa-panel" aria-labelledby="qa-title">
+            <h2 id="qa-title" style="font-size:1.1rem;">
+              🤖 AI O'qituvchi — Savol-Javob
+            </h2>
+
+            <div class="chat-messages" id="chat-messages"
+                 role="log" aria-live="polite" aria-label="Suhbat tarixi">
+              <div class="chat-msg system">
+                🤖 AI O'qituvchi tayyor. Savolingizni yozing yoki 🎙 tugmasini bosing.
+              </div>
+              <div class="chat-msg ai">
+                Assalomu alaykum! Men NurAI sun'iy intellekt o'qituvchisiman.
+                Bugungi dars bo'yicha savollaringizga javob berishga tayyorman.
+                Braille yoki texnologiya haqida nimani bilmoqchisiz? 🎓
+              </div>
+            </div>
+
+            <div class="chat-input-row" role="group" aria-label="Savol kiritish">
+              <textarea class="chat-input" id="chat-input"
+                        placeholder="Savolingizni yozing... (yoki 🎙 tugmasini bosing)"
+                        rows="2"
+                        aria-label="Savol kiritish maydoni"
+                        aria-multiline="true"></textarea>
+              <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                <button class="btn btn-primary mic-btn" id="stt-btn"
+                        aria-label="Ovozli savol berish (Alt+S)"
+                        title="Ovozli savol (Alt+S)">🎙</button>
+                <button class="btn btn-outline" id="send-btn"
+                        aria-label="Savolni yuborish">↑</button>
+              </div>
+            </div>
+
+            <div id="stt-indicator" class="hidden" aria-live="polite">
+              <div style="display:flex; align-items:center; gap:0.75rem; padding:0.5rem 0;">
+                <div class="voice-wave" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <span class="text-sm text-accent">Tinglayapman... (gapiring)</span>
+              </div>
+            </div>
+          </section>
+
+        </div><!-- right panel -->
+      </div><!-- #edu-layout -->
+    </div><!-- .page-body -->
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <p>🌟 <strong>NurAI</strong> Smart Edu · AI ovozli ta'lim platformasi</p>
+  </footer>
+
+  <script src="js/speech.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+  /* ---- Smart Edu Page Logic ---- */
+  (function () {
+    /* Courses data */
+    const courses = [
+      {
+        title: 'Braille va Texnologiya',
+        lessons: [
+          {
+            title: '1-dars: Braille alifbosi nima?',
+            meta: 'Braille va Texnologiya · 1/5',
+            content: `
+              <p><strong>Braille alifbosi</strong> — ko'zi ojiz insonlar uchun maxsus ishlab chiqilgan yozuv tizimi. U Fransuz pedagog <strong>Lui Braille</strong> tomonidan 1824-yilda ixtiro qilingan.</p>
+              <p style="margin-top:1rem;">Braille tizimi qo'lda his qilinadigan <em>nuqtalar</em> kombinatsiyasidan iborat. Har bir harf, raqam va belgi 6 ta nuqtadan tashkil topgan "katakcha" (cell) yordamida ifodalanadi.</p>
+              <p style="margin-top:1rem;">Zamonaviy texnologiyalar bilan birgalikda Braille displeylari, elektron kitoblar va ekran o'quvchilar ko'zi ojizlarga raqamli dunyoga kirish imkonini beradi.</p>`,
+          },
+          {
+            title: '2-dars: Ekran o\'quvchilar',
+            meta: 'Braille va Texnologiya · 2/5',
+            content: `
+              <p><strong>Ekran o'quvchilar</strong> (Screen Readers) — kompyuter ekranidagi matnni ovoz bilan o'qib beradigan dasturlar.</p>
+              <p style="margin-top:1rem;">Mashhur ekran o'quvchilar: <strong>NVDA</strong> (bepul, Windows), <strong>JAWS</strong> (Windows), <strong>VoiceOver</strong> (Apple qurilmalari), <strong>TalkBack</strong> (Android).</p>
+              <p style="margin-top:1rem;">Bu dasturlar klaviatura va braille displey bilan birgalikda ishlaydi. Web saytlar uchun to'g'ri HTML semantikasi va ARIA belgilari juda muhim.</p>`,
+          },
+          {
+            title: '3-dars: Braille displey',
+            meta: 'Braille va Texnologiya · 3/5',
+            content: `
+              <p><strong>Braille displey</strong> — ekrandagi matnni Braille nuqtalari shaklida ko'rsatadigan elektron qurilma.</p>
+              <p style="margin-top:1rem;">Qurilma 20–80 ta katakchadan iborat bo'lib, har biri 8 ta nuqtani dinamik ravishda ko'tarishi mumkin. Foydalanuvchi barmoqlari bilan nuqtalarni his qilib o'qiydi.</p>
+              <p style="margin-top:1rem;">USB yoki Bluetooth orqali kompyuter, smartfon va planshetlarga ulanadi. Narxi 500–5000 dollar oralig'ida.</p>`,
+          },
+          {
+            title: '4-dars: Ovozli yordamchilar',
+            meta: 'Braille va Texnologiya · 4/5',
+            content: `
+              <p><strong>Ovozli yordamchilar</strong> — sun'iy intellekt yordamida ovozli buyruqlarni tushunib, bajaradigan tizimlar.</p>
+              <p style="margin-top:1rem;">Misollar: Apple Siri, Google Assistant, Amazon Alexa, Microsoft Cortana. Bu yordamchilar smartfon, uy qurilmalari va kompyuterlarda ishlaydi.</p>
+              <p style="margin-top:1rem;">Ko'zi ojizlar uchun ovozli yordamchilar ayniqsa foydali — ekranni ko'rmay turib xabar yuborish, zvonoq qilish, qidiruv o'tkazish mumkin.</p>`,
+          },
+          {
+            title: '5-dars: Internet va ko\'zi ojizlar',
+            meta: 'Braille va Texnologiya · 5/5',
+            content: `
+              <p><strong>Web accessibility</strong> (Veb imkoniyatlar) — veb saytlarni barcha foydalanuvchilar, shu jumladan ko'zi ojizlar uchun ham foydalanish mumkin qilish.</p>
+              <p style="margin-top:1rem;">Asosiy tamoyillar: matnli alternativlar (alt text), to'g'ri sarlavha tuzilmasi (H1–H6), klaviatura boshqaruvi, rang kontrasti va ARIA belgilari.</p>
+              <p style="margin-top:1rem;">WCAG 2.1 standartlari veb saytlar uchun minimal imkoniyat talablarini belgilaydi. NurAI platforma shu standartlarga muvofiq ishlab chiqilgan.</p>`,
+          },
+        ],
+      },
+      {
+        title: 'Ingliz tili A2–B1',
+        lessons: [
+          {
+            title: '1-dars: Salomlashish iboralari',
+            meta: 'Ingliz tili · 1/12',
+            content: `
+              <p><strong>Salomlashish</strong> (Greetings) — ingliz tilida muloqotning birinchi qadami.</p>
+              <p style="margin-top:1rem;"><strong>Rasmiy:</strong> Good morning / Good afternoon / Good evening / How do you do?</p>
+              <p style="margin-top:1rem;"><strong>Norasmiy:</strong> Hi! / Hey! / What's up? / How are you? / Nice to meet you!</p>
+              <p style="margin-top:1rem;"><strong>Xayrlashish:</strong> Goodbye / Bye / See you later / Take care / Have a nice day!</p>`,
+          },
+          {
+            title: '2-dars: O\'zingizni tanishtiring',
+            meta: 'Ingliz tili · 2/12',
+            content: `
+              <p><strong>Introducing yourself</strong> — o'zingizni ingliz tilida tanishtirish.</p>
+              <p style="margin-top:1rem;"><strong>Namuna:</strong> "My name is Alisher. I am from Uzbekistan. I am 25 years old. I study at NurAI platform. I like technology and music."</p>
+              <p style="margin-top:1rem;"><strong>Foydali so'zlar:</strong> My name is... / I am from... / I live in... / I work as... / My hobby is...</p>`,
+          },
+        ],
+      },
+      {
+        title: 'Kompyuter Asoslari',
+        lessons: [
+          {
+            title: '1-dars: Kompyuter nima?',
+            meta: 'Kompyuter Asoslari · 1/8',
+            content: `
+              <p><strong>Kompyuter</strong> — ma'lumotlarni qayta ishlaydigan, saqlaydigan va uzatadigan elektron qurilma.</p>
+              <p style="margin-top:1rem;"><strong>Asosiy qismlar:</strong> Protsessor (CPU), xotira (RAM), saqlash qurilmasi (HDD/SSD), kirish qurilmalari (klaviatura, sichqoncha), chiqish qurilmalari (monitor, karnay).</p>
+              <p style="margin-top:1rem;">Ko'zi ojizlar uchun klaviatura asosiy kirish qurilmasi hisoblanadi. Barcha funksiyalar klaviatura orqali bajarilishi mumkin.</p>`,
+          },
+        ],
+      },
+      {
+        title: 'Python Dasturlash',
+        lessons: [
+          {
+            title: '1-dars: Python nima?',
+            meta: 'Python Dasturlash · 1/15',
+            content: `
+              <p><strong>Python</strong> — 1991-yilda Guido van Rossum tomonidan yaratilgan yuqori darajali dasturlash tili.</p>
+              <p style="margin-top:1rem;">Python <em>o'qilishi oson</em> va <em>yozilishi qulay</em> sintaksisga ega. Bu uni boshlang'ich dasturchilar uchun ideal qiladi.</p>
+              <p style="margin-top:1rem;"><strong>Ishlatish sohalari:</strong> Sun'iy intellekt, ma'lumotlar tahlili, veb ishlab chiqish, avtomatlashtirish, ilmiy hisoblash.</p>
+              <p style="margin-top:1rem;"><strong>Birinchi dastur:</strong> <code>print("Salom, Dunyo!")</code></p>`,
+          },
+        ],
+      },
+    ];
+
+    /* AI responses bank */
+    const aiResponses = {
+      braille: [
+        "Braille tizimi 6 ta nuqtadan iborat bo'lib, 64 ta turli kombinatsiya hosil qilish mumkin. Bu barcha harflar, raqamlar va belgilarni ifodalash uchun yetarli.",
+        "Lui Braille o'zi ham ko'zi ojiz bo'lgan. U 15 yoshida bu tizimni ixtiro qilgan va butun dunyoga sovg'a qilgan.",
+        "Hozirda Braille 140 dan ortiq tilda qo'llaniladi. Matematika va musiqa uchun ham maxsus Braille tizimlari mavjud.",
+      ],
+      texnologiya: [
+        "Screen reader dasturlari ichida NVDA eng mashhur va bepul variant. Windows uchun nvaccess.org saytidan yuklab olish mumkin.",
+        "iOS qurilmalarida VoiceOver dastlabki sozlamada o'chirilgan bo'ladi. Uni Settings > Accessibility > VoiceOver orqali yoqish mumkin.",
+        "Web accessibility uchun eng muhim narsa — to'g'ri HTML semantikasi. Har bir rasm uchun alt text yozish, sarlavhalarni to'g'ri ishlatish kerak.",
+      ],
+      ingliz: [
+        "Ingliz tilini o'rganishda har kuni 15-20 daqiqa mashq qilish eng samarali usul. Eshitib o'rganish (listening) ham juda muhim.",
+        "Podcast va audio kitoblar orqali ingliz tilini tinglash ko'zi ojizlar uchun juda qulay o'rganish usuli.",
+        "Vocabulary building uchun har kuni 5 ta yangi so'z yodlash va ularni jumlalarda ishlatish tavsiya etiladi.",
+      ],
+      python: [
+        "Python o'rganishda ikkita asosiy resurs: python.org rasmiy hujjatlar va freeCodeCamp kurslari.",
+        "Python kodi buyruq qatorida (terminal) bajariladi. Ko'zi ojizlar uchun terminal + screen reader kombinatsiyasi yaxshi ishlaydi.",
+        "Python dasturlashda indentatsiya (bo'shliqlar) juda muhim. 4 ta bo'shliq yoki 1 tab ishlatish standart hisoblanadi.",
+      ],
+      default: [
+        "Bu juda yaxshi savol! Dars materiallarini qayta ko'rib chiqing va savolni aniqroq tuzishga harakat qiling.",
+        "Albatta, bu mavzu bo'yicha ko'proq ma'lumot berishim mumkin. Qaysi qism tushunarsiz bo'ldi?",
+        "Sizning savoyingiz juda muhim. Dars materialida shu haqida batafsil yozilgan. Qaytadan o'qib ko'ring.",
+        "AI o'qituvchi sifatida aytishim mumkinki, bu tushuncha darsning eng muhim qismi. Misol bilan tushuntiraman.",
+      ],
+    };
+
+    function getAiResponse(question) {
+      const q = question.toLowerCase();
+      if (q.includes('braille') || q.includes('nuqta') || q.includes('yozuv'))
+        return aiResponses.braille[Math.floor(Math.random() * aiResponses.braille.length)];
+      if (q.includes('screen') || q.includes('nvda') || q.includes('texnologiya') || q.includes('ekran'))
+        return aiResponses.texnologiya[Math.floor(Math.random() * aiResponses.texnologiya.length)];
+      if (q.includes('ingliz') || q.includes('english') || q.includes('so\'z'))
+        return aiResponses.ingliz[Math.floor(Math.random() * aiResponses.ingliz.length)];
+      if (q.includes('python') || q.includes('dastur') || q.includes('kod'))
+        return aiResponses.python[Math.floor(Math.random() * aiResponses.python.length)];
+      return aiResponses.default[Math.floor(Math.random() * aiResponses.default.length)];
+    }
+
+    /* State */
+    let activeCourseIdx = 0;
+    let activeLessonIdx = 0;
+
+    /* DOM refs */
+    const lessonTitle   = document.getElementById('current-lesson-title');
+    const lessonMeta    = document.getElementById('lesson-meta');
+    const lessonText    = document.getElementById('lesson-text');
+    const lessonNavInfo = document.getElementById('lesson-nav-info');
+    const ttsPlayBtn    = document.getElementById('tts-play-btn');
+    const ttsPauseBtn   = document.getElementById('tts-pause-btn');
+    const ttsStopBtn    = document.getElementById('tts-stop-btn');
+    const ttsRateInput  = document.getElementById('tts-rate');
+    const ttsRateVal    = document.getElementById('tts-rate-val');
+    const ttsStatusIcon = document.getElementById('tts-status-icon');
+    const ttsStatusText = document.getElementById('tts-status-text');
+    const prevBtn       = document.getElementById('prev-lesson-btn');
+    const nextBtn       = document.getElementById('next-lesson-btn');
+    const markDoneBtn   = document.getElementById('mark-done-btn');
+    const chatMessages  = document.getElementById('chat-messages');
+    const chatInput     = document.getElementById('chat-input');
+    const sendBtn       = document.getElementById('send-btn');
+    const sttBtn        = document.getElementById('stt-btn');
+    const sttIndicator  = document.getElementById('stt-indicator');
+
+    /* Load lesson */
+    function loadLesson(courseIdx, lessonIdx) {
+      const course = courses[courseIdx];
+      if (!course) return;
+      const lesson = course.lessons[lessonIdx];
+      if (!lesson) return;
+
+      Speech.stop();
+      activeCourseIdx = courseIdx;
+      activeLessonIdx = lessonIdx;
+
+      lessonTitle.textContent = lesson.title;
+      lessonMeta.textContent  = lesson.meta;
+      lessonText.innerHTML    = lesson.content;
+      lessonNavInfo.textContent = `${lessonIdx + 1} / ${course.lessons.length}`;
+
+      prevBtn.disabled = lessonIdx === 0;
+      nextBtn.disabled = lessonIdx === course.lessons.length - 1;
+
+      setTtsIdle();
+      showToast(`📖 "${lesson.title}" yuklandi`, 'info', 2000);
+    }
+
+    /* Course card click */
+    document.querySelectorAll('.course-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.course-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        const idx = parseInt(card.dataset.course, 10);
+        loadLesson(idx, 0);
+      });
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+      });
+    });
+
+    /* TTS state helpers */
+    function setTtsSpeaking() {
+      ttsPlayBtn.disabled  = true;
+      ttsPauseBtn.disabled = false;
+      ttsStopBtn.disabled  = false;
+      ttsStatusIcon.textContent = '🔊';
+      ttsStatusText.textContent = 'O\'qiyapman...';
+      document.getElementById('tts-status').classList.add('speaking');
+    }
+    function setTtsIdle() {
+      ttsPlayBtn.disabled  = false;
+      ttsPauseBtn.disabled = true;
+      ttsStopBtn.disabled  = true;
+      ttsStatusIcon.textContent = '🔇';
+      ttsStatusText.textContent = 'Tayyor';
+      document.getElementById('tts-status').classList.remove('speaking');
+    }
+
+    /* Rate control */
+    ttsRateInput.addEventListener('input', () => {
+      ttsRateVal.textContent = parseFloat(ttsRateInput.value).toFixed(1) + '×';
+    });
+
+    /* TTS Play */
+    ttsPlayBtn.addEventListener('click', () => {
+      const course  = courses[activeCourseIdx];
+      const lesson  = course.lessons[activeLessonIdx];
+      const text    = lesson.title + '. ' + lessonText.innerText;
+      const rate    = parseFloat(ttsRateInput.value);
+      setTtsSpeaking();
+      Speech.speak(text, {
+        rate,
+        onEnd:   setTtsIdle,
+        onError: () => { setTtsIdle(); showToast('TTS xatosi yuz berdi.', 'error'); },
+      });
+    });
+
+    /* TTS Pause */
+    ttsPauseBtn.addEventListener('click', () => {
+      if (Speech.isSpeakingNow()) {
+        Speech.pause();
+        ttsPauseBtn.textContent = '▶ Davom';
+        ttsStatusText.textContent = 'To\'xtatilgan';
+      } else {
+        Speech.resume();
+        ttsPauseBtn.textContent = '⏸ Pauza';
+        ttsStatusText.textContent = 'O\'qiyapman...';
+      }
+    });
+
+    /* TTS Stop */
+    ttsStopBtn.addEventListener('click', () => {
+      Speech.stop();
+      setTtsIdle();
+    });
+
+    /* Lesson navigation */
+    prevBtn.addEventListener('click', () => {
+      if (activeLessonIdx > 0) loadLesson(activeCourseIdx, activeLessonIdx - 1);
+    });
+    nextBtn.addEventListener('click', () => {
+      const course = courses[activeCourseIdx];
+      if (activeLessonIdx < course.lessons.length - 1)
+        loadLesson(activeCourseIdx, activeLessonIdx + 1);
+    });
+    markDoneBtn.addEventListener('click', () => {
+      showToast('✅ Dars bajarildi deb belgilandi!', 'success');
+      markDoneBtn.textContent = '✓ Bajarildi ✅';
+      markDoneBtn.disabled = true;
+    });
+
+    /* Chat helpers */
+    function appendMsg(text, role) {
+      const div = document.createElement('div');
+      div.className = `chat-msg ${role}`;
+      div.textContent = text;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function submitQuestion(question) {
+      if (!question.trim()) return;
+      appendMsg(question, 'user');
+      chatInput.value = '';
+
+      setTimeout(() => {
+        const answer = getAiResponse(question);
+        appendMsg('🤖 ' + answer, 'ai');
+        if (Speech.isSupported()) {
+          Speech.speak(answer, { rate: parseFloat(ttsRateInput.value) });
+        }
+      }, 700);
+    }
+
+    /* Send button */
+    sendBtn.addEventListener('click', () => submitQuestion(chatInput.value));
+    chatInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitQuestion(chatInput.value); }
+    });
+
+    /* STT button */
+    sttBtn.addEventListener('click', () => {
+      if (Speech.isListeningNow()) {
+        Speech.stopListening();
+        sttBtn.classList.remove('listening');
+        sttBtn.textContent = '🎙';
+        sttIndicator.classList.add('hidden');
+        return;
+      }
+      if (!Speech.sttSupported()) {
+        showToast('Bu brauzer ovozni tanishni qo\'llab-quvvatlamaydi.', 'warning');
+        return;
+      }
+      Speech.stop(); // stop TTS before listening
+      sttBtn.classList.add('listening');
+      sttBtn.textContent = '⏹';
+      sttIndicator.classList.remove('hidden');
+
+      Speech.startListening({
+        onResult: (text) => {
+          chatInput.value = text;
+          showToast(`🎙 Eshitildi: "${text}"`, 'info', 2500);
+        },
+        onEnd: () => {
+          sttBtn.classList.remove('listening');
+          sttBtn.textContent = '🎙';
+          sttIndicator.classList.add('hidden');
+        },
+        onError: (err) => {
+          sttBtn.classList.remove('listening');
+          sttBtn.textContent = '🎙';
+          sttIndicator.classList.add('hidden');
+          if (err === 'not-allowed') {
+            showToast('Mikrofonga ruxsat berilmagan.', 'error');
+          } else {
+            showToast('Ovoz tanish xatosi: ' + err, 'error');
+          }
+        },
+      });
+    });
+
+    /* Responsive layout */
+    function applyLayout() {
+      const layout = document.getElementById('edu-layout');
+      if (layout) {
+        layout.style.gridTemplateColumns = window.innerWidth < 768 ? '1fr' : '320px 1fr';
+      }
+    }
+    window.addEventListener('resize', applyLayout);
+    applyLayout();
+
+  })();
+  </script>
+</body>
+</html>
