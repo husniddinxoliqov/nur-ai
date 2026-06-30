@@ -479,10 +479,11 @@
           ${m.online ? '<span class="badge badge--green" style="margin-top:4px;">Faol</span>' : ''}
         </div>
         <div class="member-card__actions">
-          <button class="btn btn--secondary btn--sm"
-                  aria-label="${esc(m.name)} ga xabar yuborish">Ulash</button>
+          <button class="btn btn--secondary btn--sm">Ulash</button>
         </div>`;
-      card.querySelector('.btn').addEventListener('click', () => {
+      const btn = card.querySelector('.btn');
+      btn.setAttribute('aria-label', m.name + ' ga xabar yuborish');
+      btn.addEventListener('click', () => {
         NurApp.speak(`${m.name} bilan bog'lanish imkoniyati tez orada qo'shiladi.`);
       });
       grid.appendChild(card);
