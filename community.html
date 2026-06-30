@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="uz" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nur Community — ko'zi ojizlar uchun ijtimoiy muhit va ovozli muloqot." />
+  <title>👥 Nur Community — NurAI</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Asosiy kontentga o'tish</a>
+
+  <nav class="nav" aria-label="Asosiy navigatsiya">
+    <a class="nav-brand" href="index.html" aria-label="NurAI bosh sahifasi">🌟 <span>Nur</span>AI</a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html">🏠 Bosh sahifa</a></li>
+      <li><a href="smart-edu.html">🎓 Smart Edu</a></li>
+      <li><a href="freelance.html">💼 Freelance</a></li>
+      <li><a href="community.html">👥 Community</a></li>
+    </ul>
+    <button class="nav-tts-btn" id="nav-tts-btn"
+            aria-label="Sahifani o'qib bering (Alt+R)"
+            title="Sahifani o'qib bering (Alt+R)">🔊</button>
+  </nav>
+
+  <main id="main-content">
+
+    <header class="page-header">
+      <div class="page-header-inner">
+        <span class="page-header-icon" aria-hidden="true">👥</span>
+        <div class="page-header-text">
+          <h1>Nur Community</h1>
+          <p>
+            O'zingizga o'xshash insonlar bilan aloqa o'rnating, tajriba ulashing
+            va ovozli muloqot qiling. Yolg'izlikni birgalikda yengamiz.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-body">
+
+      <div class="community-layout">
+
+        <!-- Main Feed -->
+        <div>
+
+          <!-- Post Composer -->
+          <section class="post-composer" aria-labelledby="composer-heading">
+            <h2 id="composer-heading" class="sr-only">Yangi post yozish</h2>
+
+            <div style="display:flex; align-items:flex-start; gap:0.75rem;">
+              <div class="post-avatar" aria-hidden="true" style="font-size:1.4rem; border-color:var(--accent);">
+                😊
+              </div>
+              <textarea class="post-textarea" id="post-textarea"
+                        placeholder="Fikringizni ulashing... (yoki 🎙 tugmasini bosing)"
+                        aria-label="Post matni kiritish maydoni"
+                        rows="3"></textarea>
+            </div>
+
+            <div id="stt-compose-indicator" class="hidden" aria-live="polite">
+              <div style="display:flex; align-items:center; gap:0.75rem; padding:0.4rem 0;">
+                <div class="voice-wave" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <span class="text-sm text-accent">Tinglayapman... ovozingizni eshitayapman</span>
+              </div>
+            </div>
+
+            <div class="post-actions-row">
+              <div class="post-tools" role="group" aria-label="Post vositalari">
+                <button class="btn btn-outline btn-sm mic-btn" id="stt-compose-btn"
+                        aria-label="Ovozli post yozish (Alt+S)"
+                        title="Ovozli xabar (Alt+S)">
+                  🎙 Ovozli yozish
+                </button>
+              </div>
+              <button class="btn btn-primary btn-sm" id="submit-post-btn"
+                      aria-label="Postni e'lon qilish">
+                📢 E'lon qilish
+              </button>
+            </div>
+          </section>
+
+          <!-- Feed Filter -->
+          <div role="group" aria-label="Lenta filtri"
+               style="display:flex; gap:0.5rem; margin-bottom:1.25rem; flex-wrap:wrap;">
+            <button class="btn btn-primary btn-sm feed-filter active" data-filter="all"
+                    aria-pressed="true">Barchasi</button>
+            <button class="btn btn-outline btn-sm feed-filter" data-filter="edu"
+                    aria-pressed="false">🎓 Ta'lim</button>
+            <button class="btn btn-outline btn-sm feed-filter" data-filter="freelance"
+                    aria-pressed="false">💼 Freelance</button>
+            <button class="btn btn-outline btn-sm feed-filter" data-filter="life"
+                    aria-pressed="false">❤️ Hayot</button>
+          </div>
+
+          <!-- Posts Feed -->
+          <section aria-label="Hamjamiyat lentatasi" aria-live="polite" id="posts-feed">
+
+            <!-- Post 1 -->
+            <article class="community-post" tabindex="0"
+                     aria-label="Aziza Karimova postini o'qish">
+              <div class="post-author">
+                <div class="post-avatar" aria-hidden="true">👩</div>
+                <div class="post-author-info">
+                  <h4>Aziza Karimova</h4>
+                  <span>Toshkent · 2 soat oldin</span>
+                </div>
+                <span class="badge badge-green" style="margin-left:auto;">🎓 Ta'lim</span>
+              </div>
+              <p class="post-body">
+                Bugun Smart Edu-da Braille va Texnologiya kursining 3-darsini tugatdim! 🎉
+                Ekran o'quvchilar haqida juda ko'p yangi narsalar bildim. NVDA dasturini
+                o'rganish uchun haqiqatan ham foydali bo'ldi. Hammaga tavsiya qilaman!
+              </p>
+              <div class="post-footer">
+                <button class="reaction-btn" data-reaction="like"
+                        aria-label="Yoqdi — 12 ta">👍 12</button>
+                <button class="reaction-btn" data-reaction="heart"
+                        aria-label="Sevdim — 5 ta">❤️ 5</button>
+                <button class="reaction-btn" data-reaction="celebrate"
+                        aria-label="Tabriklash — 8 ta">🎉 8</button>
+                <button class="btn btn-ghost btn-sm" onclick="replyPost(this)"
+                        style="margin-left:auto;"
+                        aria-label="Bu postga javob yozish">
+                  💬 Javob
+                </button>
+                <button class="btn btn-ghost btn-sm" onclick="readPost(this)"
+                        aria-label="Bu postni ovoz bilan eshitish">🔊</button>
+              </div>
+            </article>
+
+            <!-- Post 2 -->
+            <article class="community-post" tabindex="0"
+                     aria-label="Botir Xoliqov postini o'qish">
+              <div class="post-author">
+                <div class="post-avatar" aria-hidden="true">👨</div>
+                <div class="post-author-info">
+                  <h4>Botir Xoliqov</h4>
+                  <span>Samarqand · 5 soat oldin</span>
+                </div>
+                <span class="badge badge-blue" style="margin-left:auto;">💼 Freelance</span>
+              </div>
+              <p class="post-body">
+                Nur Freelance orqali birinchi ishimni topdim! 💰 Maqola tarjimasi $50 edi,
+                lekin men uchun bu katta yutuq. Ko'zi ojiz sifatida uyda ishlash imkoniyati
+                menga iqtisodiy mustaqillik bermoqda. NurAI platformasi uchun katta rahmat!
+              </p>
+              <span class="post-voice-badge" aria-label="Bu post ovoz orqali yozilgan">
+                🎙 Ovozli post
+              </span>
+              <div class="post-footer">
+                <button class="reaction-btn" data-reaction="like"
+                        aria-label="Yoqdi — 34 ta">👍 34</button>
+                <button class="reaction-btn" data-reaction="heart"
+                        aria-label="Sevdim — 21 ta">❤️ 21</button>
+                <button class="reaction-btn" data-reaction="celebrate"
+                        aria-label="Tabriklash — 15 ta">🎉 15</button>
+                <button class="btn btn-ghost btn-sm" onclick="replyPost(this)"
+                        style="margin-left:auto;"
+                        aria-label="Bu postga javob yozish">
+                  💬 Javob
+                </button>
+                <button class="btn btn-ghost btn-sm" onclick="readPost(this)"
+                        aria-label="Bu postni ovoz bilan eshitish">🔊</button>
+              </div>
+            </article>
+
+            <!-- Post 3 -->
+            <article class="community-post" tabindex="0"
+                     aria-label="Mohira Toshmatova postini o'qish">
+              <div class="post-author">
+                <div class="post-avatar" aria-hidden="true">👩‍🦯</div>
+                <div class="post-author-info">
+                  <h4>Mohira Toshmatova</h4>
+                  <span>Andijon · 1 kun oldin</span>
+                </div>
+                <span class="badge badge-orange" style="margin-left:auto;">❤️ Hayot</span>
+              </div>
+              <p class="post-body">
+                NurAI-ga qo'shilganimdan buyon hayotim o'zgardi. Ilgari uyda o'tirib ko'p
+                vaqt zerikar o'tardi. Endi har kuni yangi narsa o'rganaman, do'stlarim bor
+                va iqtisodiy jihatdan ham rivojlanmoqdaman. Ushbu platforma menga umid va
+                kuch berdi. 🌟
+              </p>
+              <div class="post-footer">
+                <button class="reaction-btn" data-reaction="like"
+                        aria-label="Yoqdi — 67 ta">👍 67</button>
+                <button class="reaction-btn" data-reaction="heart"
+                        aria-label="Sevdim — 45 ta">❤️ 45</button>
+                <button class="reaction-btn" data-reaction="celebrate"
+                        aria-label="Tabriklash — 23 ta">🎉 23</button>
+                <button class="btn btn-ghost btn-sm" onclick="replyPost(this)"
+                        style="margin-left:auto;"
+                        aria-label="Bu postga javob yozish">
+                  💬 Javob
+                </button>
+                <button class="btn btn-ghost btn-sm" onclick="readPost(this)"
+                        aria-label="Bu postni ovoz bilan eshitish">🔊</button>
+              </div>
+            </article>
+
+            <!-- Post 4 -->
+            <article class="community-post" tabindex="0"
+                     aria-label="Jasur Mirzayev postini o'qish">
+              <div class="post-author">
+                <div class="post-avatar" aria-hidden="true">👨‍💻</div>
+                <div class="post-author-info">
+                  <h4>Jasur Mirzayev</h4>
+                  <span>Toshkent · 2 kun oldin</span>
+                </div>
+                <span class="badge badge-green" style="margin-left:auto;">🎓 Ta'lim</span>
+              </div>
+              <p class="post-body">
+                Python kursini boshlagan bo'lsangiz, terminalda ishlash uchun
+                quyidagi maslahatim bor: <strong>NVDA + Windows Terminal</strong>
+                kombinatsiyasi juda yaxshi ishlaydi. Tab completion ham screen reader bilan
+                to'liq mos keladi. Savollaringiz bo'lsa, javob berishga tayyorman! 🐍
+              </p>
+              <div class="post-footer">
+                <button class="reaction-btn" data-reaction="like"
+                        aria-label="Yoqdi — 28 ta">👍 28</button>
+                <button class="reaction-btn" data-reaction="heart"
+                        aria-label="Sevdim — 9 ta">❤️ 9</button>
+                <button class="reaction-btn" data-reaction="celebrate"
+                        aria-label="Tabriklash — 12 ta">🎉 12</button>
+                <button class="btn btn-ghost btn-sm" onclick="replyPost(this)"
+                        style="margin-left:auto;"
+                        aria-label="Bu postga javob yozish">
+                  💬 Javob
+                </button>
+                <button class="btn btn-ghost btn-sm" onclick="readPost(this)"
+                        aria-label="Bu postni ovoz bilan eshitish">🔊</button>
+              </div>
+            </article>
+
+          </section><!-- #posts-feed -->
+
+        </div><!-- main feed -->
+
+        <!-- Sidebar -->
+        <aside aria-label="Yon panel">
+
+          <!-- Online Users -->
+          <div class="sidebar-widget" aria-labelledby="online-heading">
+            <h3 id="online-heading">🟢 Onlayn foydalanuvchilar
+              <span class="badge badge-green" style="margin-left:0.4rem;"
+                    id="online-count" aria-live="polite">12</span>
+            </h3>
+            <div role="list" aria-label="Onlayn foydalanuvchilar">
+              <div class="online-user" role="listitem">
+                <div class="online-dot" aria-hidden="true"></div>
+                <span class="online-name">👩 Aziza K.</span>
+                <span class="text-muted text-sm" style="margin-left:auto;">Smart Edu</span>
+              </div>
+              <div class="online-user" role="listitem">
+                <div class="online-dot" aria-hidden="true"></div>
+                <span class="online-name">👨 Botir X.</span>
+                <span class="text-muted text-sm" style="margin-left:auto;">Freelance</span>
+              </div>
+              <div class="online-user" role="listitem">
+                <div class="online-dot" aria-hidden="true"></div>
+                <span class="online-name">👩 Dilnoza Y.</span>
+                <span class="text-muted text-sm" style="margin-left:auto;">Community</span>
+              </div>
+              <div class="online-user" role="listitem">
+                <div class="online-dot" aria-hidden="true"></div>
+                <span class="online-name">👨 Kamol T.</span>
+                <span class="text-muted text-sm" style="margin-left:auto;">Smart Edu</span>
+              </div>
+              <div class="online-user" role="listitem">
+                <div class="online-dot" aria-hidden="true"></div>
+                <span class="online-name">👩 Malika R.</span>
+                <span class="text-muted text-sm" style="margin-left:auto;">Freelance</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trending Topics -->
+          <div class="sidebar-widget" aria-labelledby="trending-heading">
+            <h3 id="trending-heading">🔥 Trend mavzular</h3>
+            <div style="display:flex; flex-direction:column; gap:0.6rem;">
+              <button class="btn btn-ghost" style="justify-content:flex-start; text-align:left;"
+                      onclick="filterByTopic('NVDA')"
+                      aria-label="NVDA mavzusidagi postlarni ko'rish">
+                #NVDA <span class="text-muted text-sm">· 45 post</span>
+              </button>
+              <button class="btn btn-ghost" style="justify-content:flex-start; text-align:left;"
+                      onclick="filterByTopic('Freelance')"
+                      aria-label="Freelance mavzusidagi postlarni ko'rish">
+                #Freelance <span class="text-muted text-sm">· 38 post</span>
+              </button>
+              <button class="btn btn-ghost" style="justify-content:flex-start; text-align:left;"
+                      onclick="filterByTopic('Python')"
+                      aria-label="Python mavzusidagi postlarni ko'rish">
+                #Python <span class="text-muted text-sm">· 29 post</span>
+              </button>
+              <button class="btn btn-ghost" style="justify-content:flex-start; text-align:left;"
+                      onclick="filterByTopic('Braille')"
+                      aria-label="Braille mavzusidagi postlarni ko'rish">
+                #Braille <span class="text-muted text-sm">· 22 post</span>
+              </button>
+              <button class="btn btn-ghost" style="justify-content:flex-start; text-align:left;"
+                      onclick="filterByTopic('Ingliz')"
+                      aria-label="Ingliz tili mavzusidagi postlarni ko'rish">
+                #InglizTili <span class="text-muted text-sm">· 18 post</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Stats Widget -->
+          <div class="sidebar-widget" aria-labelledby="stats-widget-heading">
+            <h3 id="stats-widget-heading">📊 Jamiyat statistikasi</h3>
+            <div style="display:flex; flex-direction:column; gap:0.75rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="text-muted text-sm">Jami a'zolar</span>
+                <span style="font-weight:700; color:var(--accent);">1,247</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="text-muted text-sm">Bu oy yangi postlar</span>
+                <span style="font-weight:700; color:var(--accent);">342</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="text-muted text-sm">Jami kurslar</span>
+                <span style="font-weight:700; color:var(--accent);">20+</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="text-muted text-sm">Topilgan ishlar</span>
+                <span style="font-weight:700; color:var(--success);">89</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="sidebar-widget" aria-labelledby="quick-links-heading">
+            <h3 id="quick-links-heading">🔗 Tezkor havolalar</h3>
+            <div style="display:flex; flex-direction:column; gap:0.5rem;">
+              <a href="smart-edu.html" class="btn btn-outline btn-sm w-full"
+                 style="justify-content:flex-start;">
+                🎓 Dars boshlash
+              </a>
+              <a href="freelance.html" class="btn btn-outline btn-sm w-full"
+                 style="justify-content:flex-start;">
+                💼 Ish qidirish
+              </a>
+              <button class="btn btn-outline btn-sm w-full" style="justify-content:flex-start;"
+                      onclick="showToast('Yordam markazi tez orada ochiladi!', 'info')">
+                ❓ Yordam markazi
+              </button>
+            </div>
+          </div>
+
+        </aside>
+      </div><!-- .community-layout -->
+    </div><!-- .page-body -->
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <p>🌟 <strong>NurAI</strong> Nur Community · Ko'zi ojizlar uchun ijtimoiy muhit</p>
+  </footer>
+
+  <script src="js/speech.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+  (function () {
+
+    /* ---- Post submission ---- */
+    const postTextarea   = document.getElementById('post-textarea');
+    const submitPostBtn  = document.getElementById('submit-post-btn');
+    const postsFeed      = document.getElementById('posts-feed');
+    const sttComposeBtn  = document.getElementById('stt-compose-btn');
+    const sttIndicator   = document.getElementById('stt-compose-indicator');
+
+    const avatars  = ['😊', '👨', '👩', '🧑', '👴', '👵', '🧔', '👩‍💻', '👨‍🦯', '👩‍🦯'];
+    const names    = ['Siz', 'Yangi A\'zo'];
+    let isVoicePost = false;
+
+    submitPostBtn.addEventListener('click', () => {
+      const text = postTextarea.value.trim();
+      if (!text) {
+        showToast('Post matni bo\'sh bo\'lmasin!', 'warning');
+        postTextarea.focus();
+        return;
+      }
+      addPost(text, 'Siz', avatars[0], isVoicePost);
+      postTextarea.value = '';
+      isVoicePost = false;
+      showToast('✅ Postingiz e\'lon qilindi!', 'success');
+    });
+
+    function addPost(text, authorName, avatar, isVoice) {
+      const article = document.createElement('article');
+      article.className = 'community-post';
+      article.setAttribute('tabindex', '0');
+      article.setAttribute('aria-label', `${authorName} postini o\'qish`);
+
+      const categories = ['🎓 Ta\'lim', '💼 Freelance', '❤️ Hayot'];
+      const catClass   = ['badge-green', 'badge-blue', 'badge-orange'];
+      const catIdx     = Math.floor(Math.random() * 3);
+
+      article.innerHTML = `
+        <div class="post-author">
+          <div class="post-avatar" aria-hidden="true">${avatar}</div>
+          <div class="post-author-info">
+            <h4>${authorName}</h4>
+            <span>Hozir</span>
+          </div>
+          <span class="badge ${catClass[catIdx]}" style="margin-left:auto;">
+            ${categories[catIdx]}
+          </span>
+        </div>
+        <p class="post-body">${escapeHtml(text)}</p>
+        ${isVoice ? '<span class="post-voice-badge" aria-label="Bu post ovoz orqali yozilgan">🎙 Ovozli post</span>' : ''}
+        <div class="post-footer">
+          <button class="reaction-btn" data-reaction="like" aria-label="Yoqdi — 0 ta">👍 0</button>
+          <button class="reaction-btn" data-reaction="heart" aria-label="Sevdim — 0 ta">❤️ 0</button>
+          <button class="reaction-btn" data-reaction="celebrate" aria-label="Tabriklash — 0 ta">🎉 0</button>
+          <button class="btn btn-ghost btn-sm" onclick="replyPost(this)"
+                  style="margin-left:auto;" aria-label="Bu postga javob yozish">💬 Javob</button>
+          <button class="btn btn-ghost btn-sm" onclick="readPost(this)"
+                  aria-label="Bu postni ovoz bilan eshitish">🔊</button>
+        </div>`;
+
+      postsFeed.insertBefore(article, postsFeed.firstChild);
+      bindReactionBtns(article);
+      article.focus();
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    /* ---- Reaction buttons ---- */
+    function bindReactionBtns(container) {
+      container.querySelectorAll('.reaction-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const emoji = btn.textContent.match(/^[\u{1F000}-\u{1FFFF}\u2600-\u27FF]/u)?.[0]
+                     || btn.textContent[0];
+          const parts = btn.textContent.split(' ');
+          let count = parseInt(parts[1] || '0', 10);
+          if (btn.classList.toggle('active')) {
+            count++;
+            btn.setAttribute('aria-pressed', 'true');
+          } else {
+            count = Math.max(0, count - 1);
+            btn.setAttribute('aria-pressed', 'false');
+          }
+          btn.textContent = `${emoji} ${count}`;
+          btn.setAttribute('aria-label', `${count} ta`);
+        });
+      });
+    }
+
+    /* Bind on existing posts */
+    document.querySelectorAll('.community-post').forEach(bindReactionBtns);
+
+    /* ---- Read post aloud ---- */
+    window.readPost = function(btn) {
+      const post   = btn.closest('.community-post');
+      const author = post.querySelector('.post-author-info h4')?.textContent || 'Kimdir';
+      const body   = post.querySelector('.post-body')?.textContent || '';
+      if (window.Speech && Speech.isSupported()) {
+        Speech.stop();
+        Speech.speak(`${author} yozdi: ${body}`, { rate: 0.9 });
+      } else {
+        showToast('Bu brauzer ovozli o\'qishni qo\'llab-quvvatlamaydi.', 'warning');
+      }
+    };
+
+    /* ---- Reply (focus composer) ---- */
+    window.replyPost = function(btn) {
+      const post   = btn.closest('.community-post');
+      const author = post.querySelector('.post-author-info h4')?.textContent || 'a\'zo';
+      postTextarea.value = `@${author}: `;
+      postTextarea.focus();
+      postTextarea.selectionStart = postTextarea.selectionEnd = postTextarea.value.length;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    /* ---- STT for composer ---- */
+    sttComposeBtn.addEventListener('click', () => {
+      if (Speech.isListeningNow()) {
+        Speech.stopListening();
+        sttComposeBtn.classList.remove('listening');
+        sttComposeBtn.innerHTML = '🎙 Ovozli yozish';
+        sttIndicator.classList.add('hidden');
+        return;
+      }
+      if (!Speech.sttSupported()) {
+        showToast('Bu brauzer ovoz tanishni qo\'llab-quvvatlamaydi.', 'warning');
+        return;
+      }
+      Speech.stop();
+      sttComposeBtn.classList.add('listening');
+      sttComposeBtn.innerHTML = '⏹ To\'xtatish';
+      sttIndicator.classList.remove('hidden');
+
+      Speech.startListening({
+        onResult: (text) => {
+          postTextarea.value = text;
+          isVoicePost = true;
+          showToast(`🎙 Eshitildi: "${text}"`, 'info', 2500);
+        },
+        onEnd: () => {
+          sttComposeBtn.classList.remove('listening');
+          sttComposeBtn.innerHTML = '🎙 Ovozli yozish';
+          sttIndicator.classList.add('hidden');
+        },
+        onError: (err) => {
+          sttComposeBtn.classList.remove('listening');
+          sttComposeBtn.innerHTML = '🎙 Ovozli yozish';
+          sttIndicator.classList.add('hidden');
+          if (err === 'not-allowed') {
+            showToast('Mikrofonga ruxsat berilmagan. Brauzer sozlamalaridan ruxsat bering.', 'error', 5000);
+          } else {
+            showToast('Ovoz tanish xatosi: ' + err, 'error');
+          }
+        },
+      });
+    });
+
+    /* ---- Feed filters ---- */
+    const filterBtns = document.querySelectorAll('.feed-filter');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('btn-primary');
+          b.classList.add('btn-outline');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.remove('btn-outline');
+        btn.classList.add('btn-primary');
+        btn.setAttribute('aria-pressed', 'true');
+        showToast(`Filtr: "${btn.textContent.trim()}" qo'llanildi`, 'info', 1500);
+      });
+    });
+
+    /* ---- Trending topics ---- */
+    window.filterByTopic = function(topic) {
+      showToast(`🔍 #${topic} mavzusidagi postlar ko'rsatilmoqda`, 'info', 2000);
+    };
+
+    /* ---- Simulate online count update ---- */
+    setInterval(() => {
+      const countEl = document.getElementById('online-count');
+      if (countEl) {
+        const delta = Math.floor(Math.random() * 5) - 2;
+        const current = parseInt(countEl.textContent, 10) || 12;
+        const next = Math.max(3, Math.min(50, current + delta));
+        countEl.textContent = next;
+      }
+    }, 8000);
+
+  })();
+  </script>
+</body>
+</html>
