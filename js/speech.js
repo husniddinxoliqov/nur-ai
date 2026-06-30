@@ -1,130 +1,163 @@
 /**
- * speech.js — TTS & STT utilities using Web Speech API
- * NurAI Platform
+ * NurAI — Speech Engine
+ * TTS: Web Speech API (window.speechSynthesis)
+ * STT: Web Speech API (window.SpeechRecognition / webkitSpeechRecognition)
  */
 
-const Speech = (() => {
-  /* ---- Text-to-Speech ---- */
-  let currentUtterance = null;
-  let isSpeaking = false;
+(function (global) {
+  'use strict';
 
-  function speak(text, { rate = 0.95, pitch = 1, volume = 1, lang = 'uz-UZ', onStart, onEnd, onError } = {}) {
-    if (!window.speechSynthesis) {
-      console.warn('TTS not supported in this browser.');
-      if (onError) onError('TTS not supported');
-      return;
+  class SpeechEngine {
+    constructor() {
+      this.synth = global.speechSynthesis || null;
+      this.recognition = null;
+      this.isReading = false;
+      this.isListening = false;
+      this.enabled = true;          // user can toggle TTS off
+      this._voices = [];
+      this._currentUtterance = null;
+      this._onReadStart = null;
+      this._onReadEnd = null;
+
+      this._initVoices();
+      this._initSTT();
     }
 
-    // Cancel any ongoing speech
-    stop();
+    /* ── TTS ─────────────────────────────── */
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang;
-    utterance.rate = rate;
-    utterance.pitch = pitch;
-    utterance.volume = volume;
+    _initVoices() {
+      if (!this.synth) return;
+      const load = () => { this._voices = this.synth.getVoices(); };
+      load();
+      if (typeof speechSynthesis.onvoiceschanged !== 'undefined') {
+        speechSynthesis.onvoiceschanged = load;
+      }
+    }
 
-    utterance.onstart = () => {
-      isSpeaking = true;
-      if (onStart) onStart();
-    };
-    utterance.onend = () => {
-      isSpeaking = false;
-      currentUtterance = null;
-      if (onEnd) onEnd();
-    };
-    utterance.onerror = (e) => {
-      isSpeaking = false;
-      currentUtterance = null;
-      if (onError) onError(e.error);
-    };
+    _pickVoice() {
+      // Prefer Uzbek → Russian → first available
+      return (
+        this._voices.find(v => v.lang.startsWith('uz')) ||
+        this._voices.find(v => v.lang.startsWith('ru')) ||
+        this._voices[0] ||
+        null
+      );
+    }
 
-    currentUtterance = utterance;
-    window.speechSynthesis.speak(utterance);
-  }
+    /**
+     * Speak the given text.
+     * @param {string}   text
+     * @param {Function} [onStart]
+     * @param {Function} [onEnd]
+     * @returns {SpeechSynthesisUtterance|null}
+     */
+    speak(text, onStart, onEnd) {
+      if (!this.synth || !this.enabled || !text) return null;
 
-  function stop() {
-    if (window.speechSynthesis) {
-      window.speechSynthesis.cancel();
-      isSpeaking = false;
-      currentUtterance = null;
+      this.stop();
+
+      const utt = new SpeechSynthesisUtterance(text.trim());
+      utt.lang   = 'uz-UZ';
+      utt.rate   = 0.92;
+      utt.pitch  = 1;
+      utt.volume = 1;
+
+      const v = this._pickVoice();
+      if (v) utt.voice = v;
+
+      utt.onstart = () => {
+        this.isReading = true;
+        if (onStart)        onStart();
+        if (this._onReadStart) this._onReadStart(text);
+      };
+
+      utt.onend = utt.onerror = () => {
+        this.isReading = false;
+        if (onEnd)        onEnd();
+        if (this._onReadEnd)  this._onReadEnd();
+      };
+
+      this._currentUtterance = utt;
+      this.synth.speak(utt);
+      return utt;
+    }
+
+    stop() {
+      if (this.synth && this.synth.speaking) {
+        this.synth.cancel();
+      }
+      this.isReading = false;
+    }
+
+    toggle() {
+      this.enabled = !this.enabled;
+      if (!this.enabled) this.stop();
+      return this.enabled;
+    }
+
+    /* ── STT ─────────────────────────────── */
+
+    _initSTT() {
+      const SR = global.SpeechRecognition || global.webkitSpeechRecognition;
+      if (!SR) return;
+
+      this.recognition = new SR();
+      this.recognition.lang = 'uz-UZ';
+      this.recognition.continuous = false;
+      this.recognition.interimResults = true;
+      this.recognition.maxAlternatives = 1;
+    }
+
+    /**
+     * Start microphone listening.
+     * @param {Function} onResult  (transcript: string, isFinal: boolean) => void
+     * @param {Function} [onEnd]   () => void
+     * @param {Function} [onError] (errorMsg: string) => void
+     */
+    startListening(onResult, onEnd, onError) {
+      if (!this.recognition) {
+        onError && onError('Brauzeringiz ovozni tanishni qo\'llab-quvvatlamaydi');
+        return;
+      }
+
+      this.recognition.onresult = (e) => {
+        let interim = '';
+        let final   = '';
+        for (let i = e.resultIndex; i < e.results.length; i++) {
+          const t = e.results[i][0].transcript;
+          if (e.results[i].isFinal) final += t;
+          else                      interim += t;
+        }
+        onResult && onResult(final || interim, !!final);
+      };
+
+      this.recognition.onend   = () => { this.isListening = false; onEnd && onEnd(); };
+      this.recognition.onerror = (e) => { this.isListening = false; onError && onError(e.error); };
+
+      try {
+        this.recognition.start();
+        this.isListening = true;
+      } catch (err) {
+        onError && onError(err.message);
+      }
+    }
+
+    stopListening() {
+      if (this.recognition && this.isListening) {
+        this.recognition.stop();
+      }
+    }
+
+    /* ── Support check ───────────────────── */
+
+    support() {
+      return {
+        tts: !!this.synth,
+        stt: !!this.recognition
+      };
     }
   }
 
-  function pause() {
-    if (window.speechSynthesis && isSpeaking) window.speechSynthesis.pause();
-  }
+  global.NurSpeech = new SpeechEngine();
 
-  function resume() {
-    if (window.speechSynthesis) window.speechSynthesis.resume();
-  }
-
-  function isSupported() {
-    return 'speechSynthesis' in window;
-  }
-
-  function isSpeakingNow() { return isSpeaking; }
-
-  /* ---- Speech-to-Text ---- */
-  let recognition = null;
-  let isListening = false;
-
-  function sttSupported() {
-    return !!(window.SpeechRecognition || window.webkitSpeechRecognition);
-  }
-
-  function startListening({ lang = 'uz-UZ', continuous = false, onResult, onEnd, onError } = {}) {
-    if (!sttSupported()) {
-      if (onError) onError('STT not supported');
-      return;
-    }
-    if (isListening) stopListening();
-
-    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-    recognition = new SR();
-    recognition.lang = lang;
-    recognition.continuous = continuous;
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-
-    recognition.onresult = (event) => {
-      const transcript = Array.from(event.results)
-        .map(r => r[0].transcript)
-        .join(' ')
-        .trim();
-      if (onResult) onResult(transcript);
-    };
-
-    recognition.onend = () => {
-      isListening = false;
-      if (onEnd) onEnd();
-    };
-
-    recognition.onerror = (e) => {
-      isListening = false;
-      if (onError) onError(e.error);
-    };
-
-    recognition.start();
-    isListening = true;
-  }
-
-  function stopListening() {
-    if (recognition) {
-      recognition.abort();
-      recognition = null;
-      isListening = false;
-    }
-  }
-
-  function isListeningNow() { return isListening; }
-
-  return {
-    speak, stop, pause, resume,
-    isSupported, isSpeakingNow,
-    startListening, stopListening,
-    sttSupported, isListeningNow,
-  };
-})();
-
-window.Speech = Speech;
+}(window));

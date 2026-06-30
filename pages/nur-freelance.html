@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="uz" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NurAI Nur Freelance — ko'zi ojizlar uchun raqamli kasblarni o'rganish va freelance ish topish platformasi.">
+  <title>Nur Freelance 💼 — NurAI</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .workshop-card{
+      background:var(--color-navy-card);border:1px solid var(--color-border);
+      border-radius:var(--r);padding:var(--sp5);
+      display:flex;gap:var(--sp4);align-items:flex-start;
+      transition:border-color var(--t);
+    }
+    .workshop-card:hover{border-color:var(--color-accent);}
+    .workshop-card__thumb{
+      width:64px;height:64px;border-radius:var(--r-sm);
+      background:var(--color-accent-light);
+      display:flex;align-items:center;justify-content:center;
+      font-size:2rem;flex-shrink:0;
+    }
+    .workshop-card__body{flex:1;min-width:0;}
+    .workshop-card__title{font-size:var(--fs-base);font-weight:600;margin-bottom:var(--sp1);}
+    .workshop-card__meta{font-size:var(--fs-xs);color:var(--color-white-muted);margin-bottom:var(--sp3);}
+    .workshop-card__actions{display:flex;gap:var(--sp2);}
+
+    .job-card{
+      background:var(--color-navy-card);border:1px solid var(--color-border);
+      border-radius:var(--r);padding:var(--sp5);
+      transition:border-color var(--t);
+    }
+    .job-card:hover{border-color:var(--color-accent);}
+    .job-card__header{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--sp3);margin-bottom:var(--sp3);}
+    .job-card__title{font-size:var(--fs-lg);font-weight:600;}
+    .job-card__price{
+      font-size:var(--fs-base);font-weight:700;color:var(--color-success);
+      white-space:nowrap;
+    }
+    .job-card__desc{font-size:var(--fs-sm);color:var(--color-white-muted);margin-bottom:var(--sp4);line-height:1.6;}
+    .job-card__tags{display:flex;flex-wrap:wrap;gap:var(--sp2);margin-bottom:var(--sp4);}
+    .job-card__actions{display:flex;gap:var(--sp2);}
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#free-main">Asosiy tarkibga o'tish</a>
+
+<!-- HEADER -->
+<header class="header" role="banner">
+  <div class="container">
+    <div class="header__inner">
+      <a href="../index.html" class="logo" aria-label="NurAI — bosh sahifa">
+        <span class="logo__icon" aria-hidden="true">🌟</span>
+        <span>NurAI</span>
+      </a>
+      <nav class="nav" role="navigation" aria-label="Asosiy navigatsiya">
+        <ul class="nav__list">
+          <li><a href="smart-edu.html"     class="nav__link">🎓 Smart Edu</a></li>
+          <li><a href="nur-freelance.html"  class="nav__link">💼 Nur Freelance</a></li>
+          <li><a href="nur-community.html"  class="nav__link">👥 Nur Community</a></li>
+        </ul>
+      </nav>
+      <div class="header__controls">
+        <button class="btn-icon" id="tts-toggle" aria-label="Ovozli o'qishni yoqish/o'chirish" aria-pressed="true">🔊</button>
+        <button class="btn-icon" id="font-increase" aria-label="Shriftni kattalashtirish">A+</button>
+        <button class="btn-icon" id="font-decrease" aria-label="Shriftni kichiklashtirish">A−</button>
+        <button class="btn-icon menu-btn" id="menu-toggle" aria-label="Menyu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE LAYOUT -->
+<div class="page-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" aria-label="Nur Freelance navigatsiyasi">
+    <div class="sidebar__section">
+      <p class="sidebar__heading">Kategoriyalar</p>
+      <div class="sidebar__menu">
+        <button class="sidebar__item active" data-filter="all" aria-label="Barchasi">
+          <span class="sidebar__item__icon">📋</span> Barchasi
+          <span class="sidebar__badge">24</span>
+        </button>
+        <button class="sidebar__item" data-filter="til" aria-label="Til o'rganish">
+          <span class="sidebar__item__icon">🌐</span> Til o'rganish
+          <span class="sidebar__badge">8</span>
+        </button>
+        <button class="sidebar__item" data-filter="it" aria-label="IT va Texnologiya">
+          <span class="sidebar__item__icon">💻</span> IT va Texnologiya
+          <span class="sidebar__badge">6</span>
+        </button>
+        <button class="sidebar__item" data-filter="dizayn" aria-label="Dizayn">
+          <span class="sidebar__item__icon">🎨</span> Dizayn
+          <span class="sidebar__badge">4</span>
+        </button>
+        <button class="sidebar__item" data-filter="audio" aria-label="Audio va Ovoz">
+          <span class="sidebar__item__icon">🎙️</span> Audio va Ovoz
+          <span class="sidebar__badge">3</span>
+        </button>
+        <button class="sidebar__item" data-filter="yozuv" aria-label="Kontent va Yozuv">
+          <span class="sidebar__item__icon">✍️</span> Kontent va Yozuv
+          <span class="sidebar__badge">3</span>
+        </button>
+      </div>
+    </div>
+
+    <hr class="divider" style="margin:0 var(--sp4);">
+
+    <div class="sidebar__section">
+      <p class="sidebar__heading">Mening progresim</p>
+      <div style="padding:0 var(--sp5);">
+        <div style="font-size:var(--fs-sm);margin-bottom:var(--sp2);">
+          <span style="color:var(--color-accent);font-weight:700;">3</span>
+          <span style="color:var(--color-white-muted);"> kurs boshlangan</span>
+        </div>
+        <div style="font-size:var(--fs-sm);margin-bottom:var(--sp3);">
+          <span style="color:var(--color-success);font-weight:700;">1</span>
+          <span style="color:var(--color-white-muted);"> kurs tugatildi</span>
+        </div>
+        <a href="#my-courses" class="btn btn--secondary btn--sm btn--full">
+          Mening kurslarim
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main id="free-main" class="main-content" role="main">
+
+    <!-- Page header -->
+    <div class="page-header">
+      <nav aria-label="Yo'l ko'rsatgich">
+        <p class="page-header__breadcrumb">
+          <a href="../index.html">NurAI</a> › Nur Freelance
+        </p>
+      </nav>
+      <h1 class="page-header__title">💼 Nur Freelance</h1>
+      <p class="page-header__sub">Raqamli kasblarni o'rganing, workshoplarda qatnashing va freelance ish toping</p>
+    </div>
+
+    <!-- Alert -->
+    <div class="alert alert--info" role="note">
+      <span aria-hidden="true">🔊</span>
+      Sahifani ovozda tinglash uchun yuqoridagi <strong>🔊</strong> tugmasini bosing.
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs" role="region" aria-label="Nur Freelance bo'limlari">
+      <div class="tabs__nav" role="tablist" aria-label="Bo'limlar">
+        <button class="tab-btn active" role="tab"
+                aria-selected="true" aria-controls="tab-courses" id="btn-courses">
+          📚 Kurslar
+        </button>
+        <button class="tab-btn" role="tab"
+                aria-selected="false" aria-controls="tab-workshops" id="btn-workshops">
+          🎬 Workshops
+        </button>
+        <button class="tab-btn" role="tab"
+                aria-selected="false" aria-controls="tab-jobs" id="btn-jobs">
+          💼 Freelance Bozor
+        </button>
+      </div>
+
+      <!-- ── TAB: Kurslar ───────────────── -->
+      <div class="tab-panel active" id="tab-courses" role="tabpanel" aria-labelledby="btn-courses">
+        <div class="card-grid" id="courses-grid">
+
+          <article class="card" aria-labelledby="c1-title" tabindex="0">
+            <span class="card__tag">Ingliz tili</span>
+            <div class="card__icon" aria-hidden="true">🌐</div>
+            <h2 class="card__title" id="c1-title">Ingliz tili — A1 dan B2 gacha</h2>
+            <p class="card__desc">Noldan boshlang'ich darajadan o'rta darajagacha to'liq kurs. Audio darslar bilan.</p>
+            <div class="card__meta">
+              <span>📖 48 dars</span>
+              <span>⏱ 24 soat</span>
+              <span>⭐ 4.9</span>
+            </div>
+            <div class="progress-label"><span>Jarayon</span><span>40%</span></div>
+            <div class="progress-bar"><div class="progress-bar__fill" style="width:40%"></div></div>
+            <br>
+            <div style="display:flex;gap:var(--sp2);margin-top:auto;">
+              <a href="smart-edu.html" class="btn btn--primary btn--sm" style="flex:1;justify-content:center;">
+                Davom etish →
+              </a>
+              <button class="btn btn--secondary btn--sm" onclick="NurApp.speak('Ingliz tili kursi. 48 dars, 24 soat.')">🔊</button>
+            </div>
+          </article>
+
+          <article class="card" aria-labelledby="c2-title" tabindex="0">
+            <span class="card__tag card__tag--green">IT</span>
+            <div class="card__icon" aria-hidden="true">💻</div>
+            <h2 class="card__title" id="c2-title">Python dasturlash — Boshlang'ich</h2>
+            <p class="card__desc">Ko'zi ojizlar uchun moslashtirilgan audio dasturlash kursi. Terminal va ovozli yordam.</p>
+            <div class="card__meta">
+              <span>📖 32 dars</span>
+              <span>⏱ 18 soat</span>
+              <span>⭐ 4.8</span>
+            </div>
+            <div class="progress-label"><span>Jarayon</span><span>0%</span></div>
+            <div class="progress-bar"><div class="progress-bar__fill" style="width:0%"></div></div>
+            <br>
+            <div style="display:flex;gap:var(--sp2);margin-top:auto;">
+              <button class="btn btn--primary btn--sm" style="flex:1;" onclick="NurApp.speak('Python kursi boshlandi!')">
+                Boshlash
+              </button>
+              <button class="btn btn--secondary btn--sm" onclick="NurApp.speak('Python dasturlash kursi. 32 dars, 18 soat.')">🔊</button>
+            </div>
+          </article>
+
+          <article class="card" aria-labelledby="c3-title" tabindex="0">
+            <span class="card__tag card__tag--orange">Audio</span>
+            <div class="card__icon" aria-hidden="true">🎙️</div>
+            <h2 class="card__title" id="c3-title">Podkast va Audio yaratish</h2>
+            <p class="card__desc">Professional darajada audio kontent yaratish: podkast, audiokitob va ovozli lavha.</p>
+            <div class="card__meta">
+              <span>📖 20 dars</span>
+              <span>⏱ 10 soat</span>
+              <span>⭐ 4.7</span>
+            </div>
+            <div class="progress-label"><span>Jarayon</span><span>65%</span></div>
+            <div class="progress-bar"><div class="progress-bar__fill" style="width:65%"></div></div>
+            <br>
+            <div style="display:flex;gap:var(--sp2);margin-top:auto;">
+              <button class="btn btn--primary btn--sm" style="flex:1;">Davom etish →</button>
+              <button class="btn btn--secondary btn--sm" onclick="NurApp.speak('Podkast kursi. 20 dars, 10 soat.')">🔊</button>
+            </div>
+          </article>
+
+          <article class="card" aria-labelledby="c4-title" tabindex="0">
+            <span class="card__tag">Yozuv</span>
+            <div class="card__icon" aria-hidden="true">✍️</div>
+            <h2 class="card__title" id="c4-title">Kontent yozish va Blogging</h2>
+            <p class="card__desc">Ovozdan matn, SEO maqolalar va ijtimoiy tarmoq uchun kontent yaratish.</p>
+            <div class="card__meta">
+              <span>📖 25 dars</span>
+              <span>⏱ 12 soat</span>
+              <span>⭐ 4.6</span>
+            </div>
+            <div class="progress-label"><span>Jarayon</span><span>0%</span></div>
+            <div class="progress-bar"><div class="progress-bar__fill" style="width:0%"></div></div>
+            <br>
+            <div style="display:flex;gap:var(--sp2);margin-top:auto;">
+              <button class="btn btn--primary btn--sm" style="flex:1;">Boshlash</button>
+              <button class="btn btn--secondary btn--sm" onclick="NurApp.speak('Kontent yozish kursi. 25 dars, 12 soat.')">🔊</button>
+            </div>
+          </article>
+
+          <article class="card" aria-labelledby="c5-title" tabindex="0">
+            <span class="card__tag card__tag--green">IT</span>
+            <div class="card__icon" aria-hidden="true">📊</div>
+            <h2 class="card__title" id="c5-title">Ma'lumotlarni qayta ishlash</h2>
+            <p class="card__desc">Excel, Google Sheets va oddiy analitika. Ko'zi ojiz uchun maxsus klaviatura buyruqlari.</p>
+            <div class="card__meta">
+              <span>📖 28 dars</span>
+              <span>⏱ 14 soat</span>
+              <span>⭐ 4.5</span>
+            </div>
+            <div class="progress-label"><span>Jarayon</span><span>0%</span></div>
+            <div class="progress-bar"><div class="progress-bar__fill" style="width:0%"></div></div>
+            <br>
+            <div style="display:flex;gap:var(--sp2);margin-top:auto;">
+              <button class="btn btn--primary btn--sm" style="flex:1;">Boshlash</button>
+              <button class="btn btn--secondary btn--sm" onclick="NurApp.speak('Ma\'lumotlarni qayta ishlash kursi.')">🔊</button>
+            </div>
+          </article>
+
+          <article class="card" aria-labelledby="c6-title" tabindex="0">
+            <span class="card__tag">Til o'rganish</span>
+            <div class="card__icon" aria-hidden="true">🇷🇺</div>
+            <h2 class="card__title" id="c6-title">Rus tili — Kundalik muloqot</h2>
+            <p class="card__desc">Rus tilidagi kundalik so'zlashuv, savdo va ish uchun zarur iboralar.</p>
+            <div class="card__meta">
+              <span>📖 36 dars</span>
+              <span>⏱ 18 soat</span>
+              <span>⭐ 4.8</span>
+            </div>
+            <div class="progress-label"><span>Jarayon</span><span>0%</span></div>
+            <div class="progress-bar"><div class="progress-bar__fill" style="width:0%"></div></div>
+            <br>
+            <div style="display:flex;gap:var(--sp2);margin-top:auto;">
+              <button class="btn btn--primary btn--sm" style="flex:1;">Boshlash</button>
+              <button class="btn btn--secondary btn--sm" onclick="NurApp.speak('Rus tili kursi. 36 dars.')">🔊</button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- ── TAB: Workshops ─────────────── -->
+      <div class="tab-panel" id="tab-workshops" role="tabpanel" aria-labelledby="btn-workshops" hidden>
+        <div class="alert alert--success" role="note">
+          <span aria-hidden="true">📅</span>
+          Yaqin workshoplar: <strong>Ingliz tili suhbat mashqi</strong> — 15-noyabr, soat 18:00
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:var(--sp4);" id="workshops-list">
+
+          <div class="workshop-card">
+            <div class="workshop-card__thumb" aria-hidden="true">🌐</div>
+            <div class="workshop-card__body">
+              <div class="workshop-card__title">Ingliz tili: Suhbat mashqi (Jonli)</div>
+              <div class="workshop-card__meta">
+                📅 15-noyabr 2024 &nbsp;·&nbsp; ⏱ 90 daqiqa &nbsp;·&nbsp; 👥 12 ishtirokchi &nbsp;·&nbsp;
+                <span class="badge badge--green">Bepul</span>
+              </div>
+              <p style="font-size:var(--fs-sm);color:var(--color-white-muted);margin-bottom:var(--sp3);">
+                Tajribali o'qituvchi bilan jonli suhbat mashqi. Ovozli formatda, mikrofondan qatnashing.
+              </p>
+              <div class="workshop-card__actions">
+                <button class="btn btn--primary btn--sm" onclick="NurApp.speak('Workshop uchun ro\'yxatdan o\'tdingiz!')">
+                  Ro'yxatdan o'tish
+                </button>
+                <button class="btn btn--secondary btn--sm" onclick="NurApp.speak('Ingliz tili suhbat mashqi workshopi. 15-noyabr, bepul.')">🔊</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="workshop-card">
+            <div class="workshop-card__thumb" aria-hidden="true">🎙️</div>
+            <div class="workshop-card__body">
+              <div class="workshop-card__title">Podkast yaratish — Amaliy master-klass</div>
+              <div class="workshop-card__meta">
+                📅 Yozib olingan &nbsp;·&nbsp; ⏱ 2 soat &nbsp;·&nbsp; 👥 87 ko'rish &nbsp;·&nbsp;
+                <span class="badge badge--blue">Bepul</span>
+              </div>
+              <p style="font-size:var(--fs-sm);color:var(--color-white-muted);margin-bottom:var(--sp3);">
+                Noldan professional podkast qanday tuzilishini o'rgatadi. Ko'zi ojizlar uchun moslashtirilgan.
+              </p>
+              <div class="workshop-card__actions">
+                <button class="btn btn--primary btn--sm">▶ Ko'rish</button>
+                <button class="btn btn--secondary btn--sm" onclick="NurApp.speak('Podkast yaratish master-klasi. 2 soat.')">🔊</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="workshop-card">
+            <div class="workshop-card__thumb" aria-hidden="true">💻</div>
+            <div class="workshop-card__body">
+              <div class="workshop-card__title">Python bilan Avtomatlashtirish</div>
+              <div class="workshop-card__meta">
+                📅 22-noyabr 2024 &nbsp;·&nbsp; ⏱ 3 soat &nbsp;·&nbsp; 👥 8/20 joyi bor &nbsp;·&nbsp;
+                <span class="badge badge--orange">Pullik</span>
+              </div>
+              <p style="font-size:var(--fs-sm);color:var(--color-white-muted);margin-bottom:var(--sp3);">
+                Python yordamida kundalik vazifalarni avtomatlashtirish. Terminal boshqaruv va ovozli yordam.
+              </p>
+              <div class="workshop-card__actions">
+                <button class="btn btn--primary btn--sm">Ro'yxatdan o'tish</button>
+                <button class="btn btn--secondary btn--sm" onclick="NurApp.speak('Python workshop. 22-noyabr.')">🔊</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="workshop-card">
+            <div class="workshop-card__thumb" aria-hidden="true">✍️</div>
+            <div class="workshop-card__body">
+              <div class="workshop-card__title">AI Yordamida Kontent Yozish</div>
+              <div class="workshop-card__meta">
+                📅 Yozib olingan &nbsp;·&nbsp; ⏱ 1.5 soat &nbsp;·&nbsp; 👥 134 ko'rish &nbsp;·&nbsp;
+                <span class="badge badge--blue">Bepul</span>
+              </div>
+              <p style="font-size:var(--fs-sm);color:var(--color-white-muted);margin-bottom:var(--sp3);">
+                ChatGPT va boshqa AI vositalar yordamida matn yaratish. Ko'zi ojizlar uchun ovozli buyruqlar.
+              </p>
+              <div class="workshop-card__actions">
+                <button class="btn btn--primary btn--sm">▶ Ko'rish</button>
+                <button class="btn btn--secondary btn--sm" onclick="NurApp.speak('AI kontent yozish workshopi.')">🔊</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── TAB: Freelance Bozor ───────── -->
+      <div class="tab-panel" id="tab-jobs" role="tabpanel" aria-labelledby="btn-jobs" hidden>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp5);flex-wrap:wrap;gap:var(--sp3);">
+          <h2 style="font-size:var(--fs-xl);font-weight:600;">Ish e'lonlari</h2>
+          <button class="btn btn--primary btn--sm" id="post-job-btn"
+                  onclick="NurApp.speak('Ish e\'lon qilish shakli ochildi')">
+            + Ish e'lon qilish
+          </button>
+        </div>
+
+        <!-- Search row -->
+        <div style="display:flex;gap:var(--sp3);margin-bottom:var(--sp5);flex-wrap:wrap;">
+          <input class="form-input" type="search" placeholder="🔍  Ish qidirish…"
+                 aria-label="Ish qidirish" style="flex:1;min-width:180px;">
+          <select class="form-select" aria-label="Kategoriya bo'yicha filtr" style="width:180px;">
+            <option>Barcha kategoriyalar</option>
+            <option>Til o'rganish / Tarjimon</option>
+            <option>IT / Dasturlash</option>
+            <option>Audio / Podkast</option>
+            <option>Kontent / Yozuv</option>
+          </select>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:var(--sp4);">
+
+          <div class="job-card">
+            <div class="job-card__header">
+              <div>
+                <h3 class="job-card__title">Inglizcha audiokitob diktori kerak</h3>
+                <div style="font-size:var(--fs-xs);color:var(--color-white-muted);margin-top:4px;">
+                  Buyurtmachi: AzizPublishing &nbsp;·&nbsp; 📅 3-kun oldin
+                </div>
+              </div>
+              <div class="job-card__price">$150 – $300</div>
+            </div>
+            <p class="job-card__desc">
+              40 000 so'zlik ingliz tilida yozilgan romanni audio formatga o'qib berish kerak.
+              Aniq talaffuz va professional ovoz sifati talab etiladi.
+            </p>
+            <div class="job-card__tags">
+              <span class="badge badge--blue">Audio</span>
+              <span class="badge badge--blue">Ingliz tili</span>
+              <span class="badge badge--orange">O'rta</span>
+            </div>
+            <div class="job-card__actions">
+              <button class="btn btn--primary btn--sm" onclick="NurApp.speak('Ariza yuborildi!')">Ariza yuborish</button>
+              <button class="btn btn--secondary btn--sm" onclick="NurApp.speak('Inglizcha audiokitob diktori ishi. 150 dan 300 dollargacha.')">🔊</button>
+            </div>
+          </div>
+
+          <div class="job-card">
+            <div class="job-card__header">
+              <div>
+                <h3 class="job-card__title">O'zbek-Rus tarjimon (matn tarjimasi)</h3>
+                <div style="font-size:var(--fs-xs);color:var(--color-white-muted);margin-top:4px;">
+                  Buyurtmachi: GlobalTrans &nbsp;·&nbsp; 📅 1-kun oldin
+                </div>
+              </div>
+              <div class="job-card__price">$50 / matn</div>
+            </div>
+            <p class="job-card__desc">
+              Har hafta 5000 so'zlik o'zbek matnini rus tiliga tarjima qilish. Doimiy hamkorlik.
+            </p>
+            <div class="job-card__tags">
+              <span class="badge badge--blue">Tarjima</span>
+              <span class="badge badge--blue">Rus tili</span>
+              <span class="badge badge--green">Doimiy</span>
+            </div>
+            <div class="job-card__actions">
+              <button class="btn btn--primary btn--sm">Ariza yuborish</button>
+              <button class="btn btn--secondary btn--sm" onclick="NurApp.speak('O\'zbek-Rus tarjimon ishi. 50 dollar har matn.')">🔊</button>
+            </div>
+          </div>
+
+          <div class="job-card">
+            <div class="job-card__header">
+              <div>
+                <h3 class="job-card__title">Python data entry avtomatlashtirish</h3>
+                <div style="font-size:var(--fs-xs);color:var(--color-white-muted);margin-top:4px;">
+                  Buyurtmachi: DataFlow UZ &nbsp;·&nbsp; 📅 5-kun oldin
+                </div>
+              </div>
+              <div class="job-card__price">$200 – $500</div>
+            </div>
+            <p class="job-card__desc">
+              Excel faylardan ma'lumotlarni avtomatik o'qib boshqa tizimga ko'chiruvchi
+              oddiy Python skript kerak.
+            </p>
+            <div class="job-card__tags">
+              <span class="badge badge--green">IT</span>
+              <span class="badge badge--blue">Python</span>
+              <span class="badge badge--orange">Bir martalik</span>
+            </div>
+            <div class="job-card__actions">
+              <button class="btn btn--primary btn--sm">Ariza yuborish</button>
+              <button class="btn btn--secondary btn--sm" onclick="NurApp.speak('Python dasturlash ishi. 200 dan 500 dollargacha.')">🔊</button>
+            </div>
+          </div>
+
+          <div class="job-card">
+            <div class="job-card__header">
+              <div>
+                <h3 class="job-card__title">SEO maqolalar yozuvchi kerak</h3>
+                <div style="font-size:var(--fs-xs);color:var(--color-white-muted);margin-top:4px;">
+                  Buyurtmachi: WebMedia &nbsp;·&nbsp; 📅 2-kun oldin
+                </div>
+              </div>
+              <div class="job-card__price">$15 / maqola</div>
+            </div>
+            <p class="job-card__desc">
+              O'zbek tilida oyiga 20 ta SEO maqola. Har biri 1000–1500 so'z.
+              Mavzu: texnologiya, ta'lim, sog'liqni saqlash.
+            </p>
+            <div class="job-card__tags">
+              <span class="badge badge--blue">Kontent</span>
+              <span class="badge badge--blue">SEO</span>
+              <span class="badge badge--green">Doimiy</span>
+            </div>
+            <div class="job-card__actions">
+              <button class="btn btn--primary btn--sm">Ariza yuborish</button>
+              <button class="btn btn--secondary btn--sm" onclick="NurApp.speak('SEO maqola yozish ishi. 15 dollar har maqola.')">🔊</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /tabs -->
+
+  </main>
+</div>
+
+<!-- TTS Status Bar -->
+<div class="tts-bar" id="tts-bar" role="status" aria-live="polite" aria-atomic="true" hidden>
+  <div class="container">
+    <div class="tts-bar__inner">
+      <span class="tts-bar__icon" aria-hidden="true">🔊</span>
+      <span class="tts-bar__text" id="tts-bar-text">O'qilmoqda…</span>
+      <button class="tts-bar__stop" id="tts-bar-stop" aria-label="O'qishni to'xtatish">⏹ To'xtatish</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/speech.js"></script>
+<script src="../js/app.js"></script>
+<script>
+/* ── Sidebar category filter ── */
+(function () {
+  document.querySelectorAll('.sidebar__item[data-filter]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.sidebar__item[data-filter]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      NurApp.speak(btn.textContent.trim());
+    });
+  });
+}());
+</script>
+</body>
+</html>
