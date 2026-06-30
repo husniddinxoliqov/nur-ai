@@ -31,7 +31,14 @@ function showToast(message, type = 'info', duration = 3500) {
   const toast = document.createElement('div');
   toast.className = `toast toast-${type}`;
   toast.setAttribute('role', 'alert');
-  toast.innerHTML = `<span aria-hidden="true">${icons[type] || 'ℹ️'}</span> ${message}`;
+
+  const iconSpan = document.createElement('span');
+  iconSpan.setAttribute('aria-hidden', 'true');
+  iconSpan.textContent = icons[type] || 'ℹ️';
+
+  const msgNode = document.createTextNode(' ' + message);
+  toast.appendChild(iconSpan);
+  toast.appendChild(msgNode);
   container.appendChild(toast);
 
   setTimeout(() => {
